@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent mt-4">
+<!-- <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent mt-4">
     <div class="container">
         <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 text-white" href="{{ route('home') }}">
             Argon Dashboard 2 Laravel
@@ -51,7 +51,7 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 <!-- End Navbar -->
 <main class="main-content  mt-0">
     <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
@@ -203,16 +203,6 @@
                 <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
                     <span class="text-lg fab fa-github"></span>
                 </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 mx-auto text-center mt-1">
-                <p class="mb-0 text-secondary">
-                    Copyright ©
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script> Soft by Creative Tim.
-                </p>
             </div>
         </div>
     </div>
