@@ -88,16 +88,16 @@
     </div>
     <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
-            <img class="w-50 mx-auto" src="/img/illustrations/icon-documentation-warning.svg"
+            <img class="w-50 mx-auto" src="/img/illustrations/wa_logo.png"
                 alt="sidebar_illustration">
             <div class="card-body text-center p-3 w-100 pt-0">
                 <div class="docs-info">
                     <h6 class="mb-0">Need help?</h6>
-                    <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
+                    <p class="text-xs font-weight-bold mb-0">Please contact admin</p>
                 </div>
             </div>
         </div>
-        <a href="/docs/bootstrap/overview/argon-dashboard/index.html" target="_blank"
-            class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
+        <a href="https://wa.me/6281234567890" target="_blank"
+            class="btn btn-dark btn-sm w-100 mb-3">Contact</a>
     </div>
 </aside>
