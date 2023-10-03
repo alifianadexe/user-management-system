@@ -26,6 +26,11 @@ class PageController extends Controller
         return view("pages.virtual-reality");
     }
 
+    public function detail_nice()
+    {
+        return view("pages.userdetail");
+    }
+
     public function rtl()
     {
         return view("pages.rtl");
