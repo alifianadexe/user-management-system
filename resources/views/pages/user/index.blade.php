@@ -11,9 +11,6 @@
                 <div class="card-header pb-0">
                     <h6>Users</h6>
                 </div>
-                <a href="{{ route('user.show')}}" data-bs-toggle="tooltip" data-bs-title="Add">
-                    <p class="text-sm font-weight-bold mb-0 cursor-pointer">Add</p>
-                </a>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
@@ -88,9 +85,19 @@
                         </table>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-10">
+                    </div>
+                    <div class="col-md-13 text-end">
+                        <a href="{{ route('user.show')}}" data-bs-toggle="tooltip" data-bs-title="Add" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                </div>
             </div>
             
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+
 @endsection
