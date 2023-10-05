@@ -2,94 +2,86 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Resource;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\RedirectResponse;
 
 class ResourcesController extends Controller
 {
+    //
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $resources = Resource::all();
+        $title = "List Resources";
 
-        return view('pages.resource.index', compact('users'));
+        return view('pages.resource.index', compact('resources', 'title'));
     }
 
-    public function store()
+    /**
+     * Page for add new Resource
+     */
+    public function add()
     {
-        $user = request()->validate([
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
-        ]);
-
-        // Set Attribute Default
-        $user['status'] = "pending";
-        $user['create_at'] = date('Y-m-d H:i:s');
-
-        $user = User::create($user);
-
-        return redirect()->back()->with('msg', 'User Berhasil Dibuat!');
+        $title = "Add Resource";
+        $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
+        return view('pages.resource.form', compact("title", 'resources_name'));
     }
 
-    public function show($id = null)
+    /**
+     * Store a new resource.
+     */
+    public function store(Request $request): RedirectResponse
     {
-        $users = null;
-        if ($id) {
-            $id = decrypt($id);
-            $users = User::where('id', $id)->first();
-        }
-        return view('pages.user.detail', compact('users'));
-    }
+        // Validate the request...
 
-    public function update()
-    {
-        $validate = [
-            'email' => 'required|email|max:255',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
+
+        $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
+        $resources_unit = [
+            $request->unit_stone,
+            $request->unit_food,
+            $request->unit_wood,
+            $request->unit_gold
         ];
 
-        $user = request();
-        if (request()->password == null) {
-            unset($validate['password']);
-            unset($user['password']);
+        $resources_price = [
+            $request->resource_price_stone,
+            $request->resource_price_food,
+            $request->resource_price_wood,
+            $request->resource_price_gold
+        ];
+
+        $data = [];
+
+        foreach ($resources_name as $i => $resource_name) {
+            $resource = [];
+
+            $resource['kingdom_id'] = $request->kingdom_id;
+            $resource['description'] = $request->description;
+            //
+            $resource['resource_name'] = $resource_name;
+            $resource['unit'] = $resources_unit[$i];
+            $resource['resource_price'] = $resources_price[$i];
+            $resource['image_url'] = '';
+            $resource['created_at'] = date('Y-m-d H:i:s');
+            //
+
+            array_push($data, $resource);
         }
 
-        $id = decrypt($user['id']);
+        Resource::insert($data);
 
-        $user = $user->validate($validate);
-        $user = User::where('id', $id)->update($user);
-
-
-        return back()->with('success', 'Profile succesfully updated');
+        return redirect('/resources');
     }
 
-    public function approve($id)
+    /**
+     * Delete a resource.
+     */
+    public function delete(Request $request): RedirectResponse
     {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'active']);
+        $resource = Resource::find(decrypt($request->id));
 
-        return back()->with('success', 'Profile succesfully Approved!');
-    }
+        $resource->delete();
 
-    public function delete($id)
-    {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'deleted']);
-
-        return back()->with('success', 'Profile succesfully Deleted!');
-    }
-
-    public function reject($id)
-    {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'reject']);
-
-        return back()->with('success', 'Profile succesfully Rejected!');
+        return redirect('/resources');
     }
 }

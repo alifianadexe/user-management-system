@@ -62,7 +62,10 @@ Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->mi
 
 
 // Resource
-Route::get('/resources', [ResourcesController::class, 'index'])->name('user')->middleware('auth');
+Route::get('/resources', [ResourcesController::class, 'index'])->name('resource')->middleware('auth');
+Route::get('/resources/add',[ResourcesController::class, 'add'])->name('resources.add')->middleware('auth');
+Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store')->middleware('auth');
+Route::get('/resources/delete', [ResourcesController::class, 'delete'])->name('resources.delete')->middleware('auth');
 
 
 Route::group(['middleware' => 'auth'], function () {
