@@ -52,23 +52,24 @@ class ResourcesController extends Controller
 
         $data = [];
 
-        foreach($resources_name as $i => $resource_name)
-        {
+        foreach ($resources_name as $i => $resource_name) {
             $resource = [];
-            
+
             $resource['kingdom_id'] = $request->kingdom_id;
             $resource['description'] = $request->description;
             //
             $resource['resource_name'] = $resource_name;
             $resource['unit'] = $resources_unit[$i];
             $resource['resource_price'] = $resources_price[$i];
+            $resource['image_url'] = '';
+            $resource['created_at'] = date('Y-m-d H:i:s');
             //
 
             array_push($data, $resource);
         }
 
         Resource::insert($data);
- 
+
         return redirect('/resources');
     }
 
