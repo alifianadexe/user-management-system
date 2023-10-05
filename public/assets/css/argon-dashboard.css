@@ -73,6 +73,8 @@
   }
 }
 
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -23097,6 +23099,10 @@ p {
 
 .font-weight-bolder {
   font-weight: 700 !important;
+}
+
+.font-weight-bolder-2 {
+  font-weight: 500 !important;
 }
 
 .font-italic {

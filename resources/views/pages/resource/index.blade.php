@@ -10,27 +10,52 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Resources</h6>
+                    <div class="col-md-10">
+                    </div>
+                    <div class="col-md-13 text-end">
+                        <a href="{{ route('user.show')}}" data-bs-toggle="tooltip" data-bs-title="Add" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom ID</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Food
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Wood
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stone
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gold
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Create Date</th>
+                                        No. Handphone</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $users as $i => $user )
+                            <tr>
+                                        <td>
+                                            <div class="d-flex px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">2254</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-sm font-weight-bold mb-0">200 / 1500</p>
+                                        </td>
+                            </tr>        
+                                <!-- @foreach( $users as $i => $user )
                                     <tr>
                                         <td>
                                             <div class="d-flex px-3 py-1">
@@ -59,16 +84,6 @@
                                         </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                @if($user->status == "pending")
-                                                    <a href="{{ route('user.approve', ['id' => encrypt($user->id)] )}}" data-bs-toggle="tooltip" data-bs-title="Approve">
-                                                        <p class="text-sm font-weight-bold mb-0 cursor-pointer">Approve</p>
-                                                    </a>
-
-                                                    <a href="{{ route('user.reject', ['id' => encrypt($user->id)] )}}" data-bs-toggle="tooltip" data-bs-title="Reject" class="ms-2">
-                                                        <p class="text-sm font-weight-bold ps-2 mb-0 cursor-pointer">Reject</p>
-                                                    </a>
-                                                @endif
-                                                
                                                 <a href="{{ route('user.edit', ['id' => encrypt($user->id)] )}}" data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
                                                 </a>
@@ -79,23 +94,13 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach -->
                             
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-10">
-                    </div>
-                    <div class="col-md-13 text-end">
-                        <a href="{{ route('user.show')}}" data-bs-toggle="tooltip" data-bs-title="Add" class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i> Add
-                        </a>
-                    </div>
-                </div>
             </div>
-            
         </div>
         @include('layouts.footers.auth.footer')
     </div>
