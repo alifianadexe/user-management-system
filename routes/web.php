@@ -58,7 +58,8 @@ Route::post('/users/update', [UsersController::class, 'update'])->name('user.upd
 
 
 // Kingdoms
-Route::get('/kingdom', [KingdomController::class, 'index'])->name('user')->middleware('auth');
+Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
+
 
 // Resource
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resource')->middleware('auth');

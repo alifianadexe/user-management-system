@@ -73,6 +73,8 @@
   }
 }
 
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -1346,6 +1348,11 @@ progress {
   .col-md-12 {
     flex: 0 0 auto;
     width: 100%;
+  }
+
+  .col-md-13 {
+    flex: 0 0 auto;
+    width: 98%;
   }
 
   .offset-md-0 {
@@ -23092,6 +23099,10 @@ p {
 
 .font-weight-bolder {
   font-weight: 700 !important;
+}
+
+.font-weight-bolder-2 {
+  font-weight: 500 !important;
 }
 
 .font-italic {

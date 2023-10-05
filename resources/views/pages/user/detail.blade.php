@@ -16,7 +16,7 @@
                             {{ auth()->user()->firstname ?? 'Firstname' }} {{ auth()->user()->lastname ?? 'Lastname' }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            Public Relations
+                            {{ auth()->user()->ownership ?? 'Ownership' }}
                         </p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Password</label>
+                                        <label for="example-text-input" class="form-control-label">Update Password</label>
                                         <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">
                                         @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                     </div>
@@ -106,9 +106,9 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Ownership</label>
                                         <select class="form-control mb-2" name="ownership">
-                                            <option value="owner" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='owner' ? 'selected' : ''  }}>Owner</option>
-                                            <option value="admin" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='admin' ? 'selected' : ''  }}>Admin</option>
-                                            <option value="user"  {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='user' ? 'selected' : ''  }}>User</option>
+                                        <option value="owner" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='owner' ? 'selected' : ''  }}>Owner</option>
+                                        <option value="admin" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='admin' ? 'selected' : ''  }}>Admin</option>
+                                        <option value="user"  {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='user' ? 'selected' : ''  }}>User</option>
                                         </select>
                                     </div>
                                 </div>

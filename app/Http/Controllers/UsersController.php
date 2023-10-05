@@ -52,6 +52,8 @@ class UsersController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'phone_number' => 'required|min:12|max:255',
+            'ownership' => 'required',
+            'status' => 'required'
         ];
 
         $user = request();

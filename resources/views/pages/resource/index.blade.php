@@ -19,14 +19,20 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom ID</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Food
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Wood
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stone
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gold
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Create Date</th>
+                                        No. Handphone</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
@@ -60,14 +66,13 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach -->
                             
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            
         </div>
         @include('layouts.footers.auth.footer')
     </div>
