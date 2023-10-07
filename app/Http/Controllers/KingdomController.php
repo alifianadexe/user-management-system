@@ -35,7 +35,7 @@ class KingdomController extends Controller
 
         Kingdom::create($validatedData);
 
-        return redirect()->back()->with('msg', 'Kingdom Berhasil Dibuat!');
+        return back()->with('msg', 'Kingdom Berhasil Dibuat!');
     }
 
     public function update(Request $request, $id)

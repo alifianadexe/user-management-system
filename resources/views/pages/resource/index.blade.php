@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => $title])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Resource Management'])
     
     <div class="row mt-4 mx-4">
         <div class="col-12">

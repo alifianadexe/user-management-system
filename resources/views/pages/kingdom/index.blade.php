@@ -26,8 +26,12 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom ID</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Create Date</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                        Created Date</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Updated Date</th>
+                                    <th 
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                         >Description</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -49,6 +53,9 @@
                                         </td>  
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->created_at }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $kingdom->updated_at }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm" style="white-space: normal; word-wrap: break-word; max-width: 500px;">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->desc }}
