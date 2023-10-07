@@ -58,8 +58,12 @@ Route::post('/users/update', [UsersController::class, 'update'])->name('user.upd
 
 
 // Kingdoms
-Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
-
+Route::get('/kingdoms', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
+Route::get('/kingdoms/add', [KingdomController::class, 'show'])->name('kingdom.add')->middleware('auth');
+Route::get('/kingdoms/edit/{id}', [KingdomController::class, 'show'])->name('kingdom.edit')->middleware('auth');
+Route::get('/kingdoms/delete/{id}', [KingdomController::class, 'delete'])->name('kingdom.delete')->middleware('auth');
+Route::post('/kingdoms/store', [KingdomController::class, 'store'])->name('kingdom.store')->middleware('auth');
+Route::post('/kingdoms/update/{id}', [KingdomController::class, 'update'])->name('kingdom.update')->middleware('auth');
 
 // Resource
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resource')->middleware('auth');

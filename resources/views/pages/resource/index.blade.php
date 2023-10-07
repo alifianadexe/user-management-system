@@ -7,11 +7,13 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>{{ $title }}</h6>
-                </div>
-                <div class="card-header pb-0">
-                    <div>
-                        <a href="{{ route('resources.add') }}" class="btn btn-primary btn-sm ms-auto">Add</a>
+                    <h6>Resources</h6>
+                    <div class="col-md-10">
+                    </div>
+                    <div class="col-md-13 text-end">
+                        <a href="{{ route('user.show')}}" data-bs-toggle="tooltip" data-bs-title="Add" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
                     </div>
                 </div>
                 <div class="card-body px-2 pt-2 pb-5">
@@ -66,7 +68,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach -->
+                                @endforeach
                             
                             </tbody>
                         </table>

@@ -7,7 +7,7 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <img src="/img/anopics.jpg" class="w-100 border-radius-lg shadow-sm">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -121,17 +121,6 @@
                                             <option value="deleted"  {{ (!isset($users) ? "" : old('status', $users->status)) =='deleted' ? 'selected' : ''  }}>Deleted</option>
                                             <option value="pending"  {{ (!isset($users) ? "" : old('status', $users->status)) =='pending' ? 'selected' : ''  }}>Pending</option>
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">Description</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Description User</label>
-                                        <input disabled class="form-control" type="text" name="about"
-                                            value="{{ !isset($users) ? "" : old('about', $users->about) }}">
                                     </div>
                                 </div>
                             </div>

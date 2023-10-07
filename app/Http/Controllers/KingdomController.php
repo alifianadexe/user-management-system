@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Kingdom;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -10,86 +10,64 @@ class KingdomController extends Controller
 {
     public function index()
     {
-        $kingdoms = User::orderBy('created_at', 'desc')->get();
+        $kingdoms = Kingdom::orderBy('created_at', 'asc')->get();
 
         return view('pages.kingdom.index', compact('kingdoms'));
     }
 
-    public function store()
+        public function show($id = null)
     {
-        $kingdoms = request()->validate([
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
+        $kingdom = null;
+        if ($id) {
+            $kingdom = Kingdom::find(decrypt($id));
+        }
+        return view('pages.kingdom.detail', compact('kingdom'));
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'kingdom_id' => 'required|unique:kingdoms,kingdom_id',
+            'desc' => 'required',
         ]);
 
-        // Set Attribute Default
-        $kingdoms['status'] = "pending";
-        $kingdoms['create_at'] = date('Y-m-d H:i:s');
+        $validatedData['created_at'] = now();
 
-        $kingdoms = User::create($kingdoms);
+        Kingdom::create($validatedData);
 
-        return redirect()->back()->with('msg', 'User Berhasil Dibuat!');
+        return redirect()->back()->with('msg', 'Kingdom Berhasil Dibuat!');
     }
 
-    public function show($id = null)
+    public function update(Request $request, $id)
     {
-        $kingdoms = null;
-        if ($id) {
-            $id = decrypt($id);
-            $kingdoms = User::where('id', $id)->first();
-        }
-        return view('pages.user.detail', compact('users'));
-    }
+        $validatedData = $request->validate([
+            'kingdom_id' => [
+                'required',
+            ],
+            'desc' => 'required',
+        ]);
 
-    public function update()
-    {
-        $validate = [
-            'email' => 'required|email|max:255',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
-        ];
+        $kingdom = Kingdom::find($id);
 
-        $kingdoms = request();
-        if (request()->password == null) {
-            unset($validate['password']);
-            unset($user['password']);
+        if (!$kingdom) {
+            return redirect()->back()->with('error', 'Kingdom tidak ditemukan!');
         }
 
-        $id = decrypt($kingdoms['id']);
+        $kingdom->update($validatedData);
 
-        $kingdoms = $user->validate($validate);
-        $kingdoms = User::where('id', $id)->update($kingdoms);
-
-
-        return back()->with('success', 'Profile succesfully updated');
-    }
-
-    public function approve($id)
-    {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'active']);
-
-        return back()->with('success', 'Profile succesfully Approved!');
+        return back()->with('success', 'Kingdom berhasil diperbarui');
     }
 
     public function delete($id)
     {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'deleted']);
+        $kingdom = Kingdom::find(decrypt($id));
 
-        return back()->with('success', 'Profile succesfully Deleted!');
-    }
+        if (!$kingdom) {
+            return redirect()->back()->with('error', 'Kingdom tidak ditemukan!');
+        }
 
-    public function reject($id)
-    {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'reject']);
+        $kingdom->delete();
 
-        return back()->with('success', 'Profile succesfully Rejected!');
+        return back()->with('success', 'Kingdom berhasil dihapus');
     }
 }

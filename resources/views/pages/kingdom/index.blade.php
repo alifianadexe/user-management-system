@@ -13,7 +13,7 @@
                     <div class="col-md-10">
                     </div>
                     <div class="col-md-13 text-end">
-                        <a href="{{ route('kingdom.show')}}" data-bs-toggle="tooltip" data-bs-title="Add" class="btn btn-primary btn-sm">
+                        <a href="{{ route('kingdom.add')}}" data-bs-toggle="tooltip" data-bs-title="Add" class="btn btn-primary btn-sm">
                             <i class="fas fa-plus"></i> Add
                         </a>
                     </div>
@@ -23,14 +23,12 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Number</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom ID</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Create Date</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                        >Description</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
@@ -42,40 +40,22 @@
                                         <td>
                                             <div class="d-flex px-3 py-1">
                                                 <div>
-                                                    <img src="./img/team-1.jpg" class="avatar me-3" alt="image">
+                                                    <img src="./img/icons/flags/flag1.jpg" class="avatar me-3" alt="image">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $kingdom->firstname }} {{ $kingdom->lastname }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $kingdom->kingdom_id }}</h6>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-sm font-weight-bold mb-0">{{ $kingdom->ownership }}</p>
-                                        </td>
-                                        <td class="align-middle  text-center text-sm">
-                                            @if($kingdom->status == "pending")
-                                                <span class="badge badge-sm bg-gradient-secondary">{{ $kingdom->status }}</span>
-                                            @elseif($kingdom->status == "active")
-                                                <span class="badge badge-sm bg-gradient-success">{{ $kingdom->status }}</span>
-                                            @else
-                                                <span class="badge badge-sm bg-gradient-danger">{{ $kingdom->status }}</span>
-                                            @endif
-                                        </td>    
+                                        </td>  
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->created_at }}</p>
                                         </td>
+                                        <td class="align-middle text-center text-sm" style="white-space: normal; word-wrap: break-word; max-width: 500px;">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $kingdom->desc }}
+                                            </p>
+                                        </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                @if($kingdom->status == "pending")
-                                                    <a href="{{ route('kingdom.approve', ['id' => encrypt($kingdom->id)] )}}" data-bs-toggle="tooltip" data-bs-title="Approve">
-                                                        <p class="text-sm font-weight-bold mb-0 cursor-pointer">Approve</p>
-                                                    </a>
-
-                                                    <a href="{{ route('kingdom.reject', ['id' => encrypt($kingdom->id)] )}}" data-bs-toggle="tooltip" data-bs-title="Reject" class="ms-2">
-                                                        <p class="text-sm font-weight-bold ps-2 mb-0 cursor-pointer">Reject</p>
-                                                    </a>
-                                                @endif
-                                                
                                                 <a href="{{ route('kingdom.edit', ['id' => encrypt($kingdom->id)] )}}" data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
                                                 </a>
