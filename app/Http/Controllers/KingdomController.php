@@ -10,14 +10,14 @@ class KingdomController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $kingdoms = User::orderBy('created_at', 'desc')->get();
 
-        return view('pages.kingdom.index', compact('users'));
+        return view('pages.kingdom.index', compact('kingdoms'));
     }
 
     public function store()
     {
-        $user = request()->validate([
+        $kingdoms = request()->validate([
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|confirmed|min:8|max:255',
             'firstname' => 'required',
@@ -26,20 +26,20 @@ class KingdomController extends Controller
         ]);
 
         // Set Attribute Default
-        $user['status'] = "pending";
-        $user['create_at'] = date('Y-m-d H:i:s');
+        $kingdoms['status'] = "pending";
+        $kingdoms['create_at'] = date('Y-m-d H:i:s');
 
-        $user = User::create($user);
+        $kingdoms = User::create($kingdoms);
 
         return redirect()->back()->with('msg', 'User Berhasil Dibuat!');
     }
 
     public function show($id = null)
     {
-        $users = null;
+        $kingdoms = null;
         if ($id) {
             $id = decrypt($id);
-            $users = User::where('id', $id)->first();
+            $kingdoms = User::where('id', $id)->first();
         }
         return view('pages.user.detail', compact('users'));
     }
@@ -54,16 +54,16 @@ class KingdomController extends Controller
             'phone_number' => 'required|min:12|max:255',
         ];
 
-        $user = request();
+        $kingdoms = request();
         if (request()->password == null) {
             unset($validate['password']);
             unset($user['password']);
         }
 
-        $id = decrypt($user['id']);
+        $id = decrypt($kingdoms['id']);
 
-        $user = $user->validate($validate);
-        $user = User::where('id', $id)->update($user);
+        $kingdoms = $user->validate($validate);
+        $kingdoms = User::where('id', $id)->update($kingdoms);
 
 
         return back()->with('success', 'Profile succesfully updated');

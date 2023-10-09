@@ -16,7 +16,7 @@
                             {{ auth()->user()->firstname ?? 'Firstname' }} {{ auth()->user()->lastname ?? 'Lastname' }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            <!-- Ini menampilkan role -->
+                            {{ auth()->user()->ownership ?? 'Ownership' }}
                         </p>
                     </div>
                 </div>

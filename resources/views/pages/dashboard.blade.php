@@ -76,7 +76,7 @@
                             <h6 class="mb-2">Rate Price RSS</h6>
                         </div>
                     </div>
-                    <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                         <table class="table align-items-center ">
                             <tbody>
                                 <tr>
