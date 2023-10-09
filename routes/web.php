@@ -27,6 +27,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\KingdomController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\StockController;
 
 Route::get('/', function () {
 	return redirect('/dashboard');
@@ -59,6 +60,7 @@ Route::post('/users/update', [UsersController::class, 'update'])->name('user.upd
 
 // Kingdoms
 Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
+Route::get('/kingdom/delete', [KingdomController::class, 'delete'])->name('kingdom.delete')->middleware('auth');
 
 
 // Resource
@@ -66,6 +68,9 @@ Route::get('/resources', [ResourcesController::class, 'index'])->name('resource'
 Route::get('/resources/add',[ResourcesController::class, 'add'])->name('resources.add')->middleware('auth');
 Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store')->middleware('auth');
 Route::get('/resources/delete', [ResourcesController::class, 'delete'])->name('resources.delete')->middleware('auth');
+
+// Stock
+Route::get('/stock/add',[StockController::class, 'add'])->name('stock.add')->middleware('auth');
 
 
 Route::group(['middleware' => 'auth'], function () {

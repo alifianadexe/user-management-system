@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('resources', function (Blueprint $table) {
+        Schema::create('kingdoms', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('kingdom_id');
-            $table->string('resource_name', 100);
-            $table->string('description', 200);
-            $table->integer('unit');
-            $table->integer('resource_price');
-            $table->string('image_url')->nullable();    
+            $table->integer('name');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resources');
+        Schema::dropIfExists('kingdoms');
     }
 };

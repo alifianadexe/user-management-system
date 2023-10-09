@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resource;
+use App\Models\Kingdom;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -20,11 +21,10 @@ class ResourcesController extends Controller
     /**
      * Page for add new Resource
      */
-    public function add()
+    public function add(Request $request)
     {
-        $title = "Add Resource";
-        $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
-        return view('pages.resource.form', compact("title", 'resources_name'));
+
+        //
     }
 
     /**
@@ -33,7 +33,6 @@ class ResourcesController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Validate the request...
-
 
         $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
         $resources_unit = [

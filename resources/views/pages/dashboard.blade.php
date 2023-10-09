@@ -75,232 +75,62 @@
                         <div class="d-flex justify-content-between">
                             <h6 class="mb-2">Rate Price RSS</h6>
                         </div>
+                        <div class="card-header pb-0">
+                            <div>
+                                <a href="{{ route('resources.add') }}" class="btn btn-primary btn-sm ms-auto">Add</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                         <table class="table align-items-center ">
                             <tbody>
+
+                                @foreach ($items as $item)                 
                                 <tr>
                                     <td class="w-30">
                                         <div class="d-flex px-2 py-1 align-items-center">
                                             <div>
                                                 <img src="./img/icons/flags/flag1.jpg" alt="Country flag" width="23" height="17">
                                             </div>
+                                            
+                                            {{-- Kingdom Name --}}
                                             <div class="ms-4">
                                                 <p class="text-xs font-weight-bold mb-0">Kingdom</p>
-                                                <h6 class="text-sm mb-0">2045</h6>
+                                                <h6 class="text-sm mb-0">{{ $item['name'] }}</h6>
                                             </div>
                                         </div>
                                     </td>
+
+                                    {{-- Resources --}}
+                                    @foreach ($item['data'] as $resource)
                                     <td>
                                         <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Stone:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.000</h6>
+                                            <p class="text-xs font-weight-bold mb-0">{{ ucwords($resource->name) }}:</p>
+                                            <h6 class="text-sm mb-0">{{ $resource->unit }} M : {{ "Rp " . number_format($resource->price) }}</h6>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Food:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.800</h6>
+                                    @endforeach
+
+                                    {{-- Button Action --}}
+                                    <td class="align-middle text-end">
+                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center">
+
+                                            <a href="{{ route('kingdom.delete', ['id' => encrypt($item['id'])]) }}" data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
+                                                <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete {{ $item['id'] }}</p>
+                                            </a>
+
+                                            @if (count($item['data']) > 0)
+                                            <a href="{{ route('stock.add', [ 'id' => encrypt($item['id']), 'name' => $item['name'] ]) }}" data-bs-toggle="tooltip" data-bs-title="Add" class="ms-2">
+                                                <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Stock</p>
+                                            </a>
+                                            @endif
+                                            
                                         </div>
                                     </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Wood:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.800</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Gold:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.500</h6>
-                                        </div>
-                                    </td>
+
                                 </tr>
-                                <tr>
-                                    <td class="w-30">
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <img src="./img/icons/flags/flag2.png" alt="Country flag" width="23" height="17">
-                                            </div>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">Kingdom</p>
-                                                <h6 class="text-sm mb-0">3500</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Stone:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.100</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Food:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.900</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Wood:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.900</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Gold:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.900</h6>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="w-30">
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <img src="./img/icons/flags/flag3.jpg" alt="Country flag" width="23" height="17">
-                                            </div>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">Kingdom</p>
-                                                <h6 class="text-sm mb-0">2885</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Stone:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.700</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Food:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.000</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Wood:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.000</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Gold:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.800</h6>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="w-30">
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <img src="./img/icons/flags/flag4.png" alt="Country flag" width="23" height="17">
-                                            </div>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">Kingdom</p>
-                                                <h6 class="text-sm mb-0">2800</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Stone:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.100</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Food:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.900</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Wood:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.900</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Gold:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.700</h6>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="w-30">
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <img src="./img/icons/flags/flag5.png" alt="Country flag" width="23" height="17">
-                                            </div>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">Kingdom</p>
-                                                <h6 class="text-sm mb-0">2090</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Stone:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.400</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Food:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.300</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Wood:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.300</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Gold:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.800</h6>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="w-30">
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <img src="./img/icons/flags/flag6.png" alt="Country flag" width="23" height="17">
-                                            </div>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">Kingdom</p>
-                                                <h6 class="text-sm mb-0">3005</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Stone:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.000</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Food:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.300</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Wood:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp1.300</h6>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Gold:</p>
-                                            <h6 class="text-sm mb-0">1 M : Rp2.000</h6>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kingdom;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -62,7 +63,6 @@ class KingdomController extends Controller
 
         $id = decrypt($kingdoms['id']);
 
-        $kingdoms = $user->validate($validate);
         $kingdoms = User::where('id', $id)->update($kingdoms);
 
 
@@ -77,10 +77,10 @@ class KingdomController extends Controller
         return back()->with('success', 'Profile succesfully Approved!');
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $id = decrypt($id);
-        User::where('id', $id)->update(['status' => 'deleted']);
+        $resource = Kingdom::find(decrypt($request->id));
+        $resource->delete();
 
         return back()->with('success', 'Profile succesfully Deleted!');
     }
