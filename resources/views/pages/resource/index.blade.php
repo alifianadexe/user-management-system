@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => $title])
-    
+
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
@@ -19,55 +19,65 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom ID</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom
+                                        ID</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Food
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Wood
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Wood
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stone
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Stone
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gold
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Gold
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No. Handphone</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $resources as $i => $resource )
+                                @foreach ($resources as $id => $resource)
                                     <tr>
-                                        <td>
-                                            <div class="d-flex px-3 py-1">
-                                                <div>
-                                                    <img src="./img/team-1.jpg" class="avatar me-3" alt="image">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $resource->resource_name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $resource->created_at }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['kingdom_id'] }}</p>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Food'] }}</p>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Wood'] }}</p>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Stone'] }}</p>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Gold'] }}</p>
                                         </td>
 
                                         {{-- Button Action --}}
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
 
-                                                <a href="{{ route('resources.delete', ['id' => encrypt($resource->id)]) }}" data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
+                                                <a href="{{ route('resources.edit', ['id' => encrypt($resource['id'])]) }}"
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
+                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
+                                                </a>
+                                                <a href="{{ route('resources.delete', ['id' => encrypt($resource['id'])]) }}"
+                                                    data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete</p>
                                                 </a>
-                                                
+
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach -->
-                            
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

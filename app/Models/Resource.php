@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     // use HasFactory;
+    public function stocks()
+    {
+        return $this->hasMany('Stocks');
+    }
 }
