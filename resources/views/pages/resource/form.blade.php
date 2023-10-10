@@ -47,6 +47,10 @@
                                 <div class="row">
                                     {{-- Resource Name
                                   (Stone, Food, Wood, Gold) --}}
+
+                                    <input type="hidden" name="{{ strtolower($resource_name) . '_id' }}"
+                                        value="{{ !isset($resources) ? '' : $resources[$resource_name . '_id'] }}">
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Resource Name</label>
@@ -65,7 +69,7 @@
                                             <label for="example-text-input" class="form-control-label">Unit</label>
                                             <input class="form-control" type="number"
                                                 name="unit_{{ strtolower($resource_name) }}"
-                                                value="{{ !isset($resources) ? '' : $resources[$resource_name . '_unit'] }}">
+                                                value="{{ !isset($resources) ? 0 : $resources[$resource_name . '_unit'] }}">
                                             @error('lastname')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror
@@ -79,7 +83,7 @@
                                                 Price</label>
                                             <input type="number" name="resource_price_{{ strtolower($resource_name) }}"
                                                 class="form-control"
-                                                value="{{ !isset($resources) ? '' : $resources[$resource_name] }}">
+                                                value="{{ !isset($resources) ? 0 : $resources[$resource_name] }}">
                                             @error('password')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror

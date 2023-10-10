@@ -45,7 +45,6 @@ class ResourcesController extends Controller
             $resources = $this->get_resource($id);
         }
 
-
         $title = "Form Resource";
         $resources_name = $this->resources_name;
 
@@ -75,17 +74,24 @@ class ResourcesController extends Controller
 
         $res = Resource::where('kingdom_id', $kingdom->id)->get();
         $resources = [];
+
         $resources['id'] = $kingdom->id;
-        $resources['kingdom_id'] = $kingdom->kingdom_id;
+
         $resources['desc'] = $kingdom->desc;
+        $resources['kingdom_id'] = $kingdom->kingdom_id;
 
         foreach ($this->resources_name as $res_name) {
+
             $resources[$res_name] = 0;
             $resources[$res_name .  "_unit"] = 0;
+            $resources[$res_name . '_id'] = 0;
+
             foreach ($res as $resource) {
+
                 if ($resource->resource_name == $res_name) {
                     $resources[$res_name] = $resource->resource_price;
                     $resources[$res_name . "_unit"] = $resource->unit;
+                    $resources[$res_name . "_id"] = $resource->id;
                 }
             }
         }
@@ -96,6 +102,13 @@ class ResourcesController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
+        $resource_id = [
+            $request->stone_id,
+            $request->food_id,
+            $request->wood_id,
+            $request->gold_id
+        ];
+
         $resources_unit = [
             $request->unit_stone,
             $request->unit_food,
@@ -110,16 +123,11 @@ class ResourcesController extends Controller
             $request->resource_price_gold
         ];
 
-        $data = [];
+        foreach ($resource_id as $i => $id) {
 
-        foreach ($this->resources_name as $i) {
+            $resource = ['unit' => $resources_unit[$i], 'resource_price' => $resources_price[$i]];
 
-            $resource['unit'] = $resources_unit[$i];
-            $resource['resource_price'] = $resources_price[$i];
-
-            array_push($data, $resource);
-
-            $resource = Resource::where('id', $resource['id'])->update($data);
+            $resource = Resource::where('id', $id)->update($resource);
         }
 
         return back()->with('success', 'Resources succesfully updated');

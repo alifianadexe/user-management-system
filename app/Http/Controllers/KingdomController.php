@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 
 class KingdomController extends Controller
 {
+    private $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
+
     public function index()
     {
         $kingdoms = Kingdoms::orderBy('created_at', 'desc')->get();
@@ -24,6 +26,24 @@ class KingdomController extends Controller
         ]);
 
         $kingdoms = Kingdoms::create($kingdoms);
+
+        $data = [];
+
+        foreach ($this->resources_name as $i => $resource_name) {
+            $resource = [];
+
+            $resource['kingdom_id'] = $kingdoms->id;
+            $resource['description'] = '';
+
+            $resource['resource_name'] = $resource_name;
+            $resource['unit'] = 0;
+            $resource['resource_price'] = 0;
+            $resource['image_url'] = '';
+
+            array_push($data, $resource);
+        }
+
+        Resource::insert($data);
 
         return redirect()->back()->with('success', 'Kingdoms Berhasil Dibuat!');
     }
