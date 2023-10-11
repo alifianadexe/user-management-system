@@ -4,52 +4,88 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
+use App\Models\Kingdoms;
 use App\Models\Stocks;
 use App\Models\Resource;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class StocksController extends Controller
+class StocksController extends CustomController
 {
     public function index()
     {
         // $stocks = Stocks::orderBy('created_at', 'desc')->get();
         $title = "List Stocks";
         $userId = Auth::id();
-        $stocks = DB::table('stocks')->where('stocks.user_id', $userId)->join('resources', 'resources.id', '=', 'stocks.resource_id')->get();
+        $stocks = DB::table('stocks')->where('stocks.user_id', $userId)->join('resources', 'resources.id', '=', 'stocks.resource_id')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->orderBy('stocks.created_at')->get();
+
+        // $this->debug($stocks);
+
         return view('pages.stocks.index', compact('stocks', 'title'));
     }
 
-    public function store()
+    public function store(Request $request): RedirectResponse
     {
-        $stocks = request()->validate([
-            'email' => 'required|email|max:255|unique:stocks,email',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
-        ]);
+        $resources_unit = [
+            "stone" => $request->unit_stone,
+            "food" => $request->unit_food,
+            "wood" => $request->unit_wood,
+            "gold" => $request->unit_gold
+        ];
 
-        // Set Attribute Default
-        $stocks['status'] = "pending";
-        $stocks['create_at'] = date('Y-m-d H:i:s');
+        $data = [];
 
-        $stocks = Stocks::create($stocks);
+        $resource['kingdom_id'] = $request->kingdom_id;
+        $resource_list = Resource::where('kingdom_id', $request->kingdom_id)->get();
 
-        return redirect()->back()->with('msg', 'stocks Berhasil Dibuat!');
+        $userId = Auth::id();
+
+        foreach ($resource_list as $i => $resource) {
+            $stock = [];
+
+            $amount = $resources_unit[strtolower($resource->resource_name)];
+
+            if ($amount > 0) {
+                $stock['user_id'] = $userId;
+                $stock['resource_id'] = $resource->id;
+                $stock['amount'] = $amount;
+                $stock['status'] = 'pending';
+                $stock['created_at'] = date('Y-m-d H:i:s');
+
+                array_push($data, $stock);
+            }
+        }
+
+        // $this->debug($data);
+
+        Stocks::insert($data);
+
+        return redirect()->back()->with('msg', 'Stocks Berhasil Dibuat!');
     }
 
     public function show($id = null)
     {
-        $stocks = null;
-        if ($id) {
+        $stocks = [];
+        $resources = [];
+
+        if (isset($id)) {
             $id = decrypt($id);
-            $stocks = Stocks::where('id', $id)->first();
+            $stocks = DB::table('stocks')->where('stocks.id', $id)->join('resources', 'resources.id', '=', 'stocks.resource_id')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->first();
+        } else {
+            $resources = $this->get_resources_detail($id);
         }
-        $resources_name = Resource::all();
-        $title = 'Form Stocks';
-        return view('pages.stocks.form', compact('stocks', 'title', 'resources_name'));
+
+
+        $title = "Form Stock";
+        $resources_name = $this->resources_name;
+        $kingdoms = Kingdoms::all();
+
+        // $this->debug($stocks);
+
+        return view('pages.stocks.form', compact('resources', 'stocks', 'kingdoms', 'title', 'resources_name'));
     }
 
     public function update()
@@ -77,29 +113,5 @@ class StocksController extends Controller
 
 
         return back()->with('success', 'Profile succesfully updated');
-    }
-
-    public function approve($id)
-    {
-        $id = decrypt($id);
-        Stocks::where('id', $id)->update(['status' => 'active']);
-
-        return back()->with('success', 'Profile succesfully Approved!');
-    }
-
-    public function delete($id)
-    {
-        $id = decrypt($id);
-        Stocks::where('id', $id)->update(['status' => 'deleted']);
-
-        return back()->with('success', 'Profile succesfully Deleted!');
-    }
-
-    public function reject($id)
-    {
-        $id = decrypt($id);
-        Stocks::where('id', $id)->update(['status' => 'reject']);
-
-        return back()->with('success', 'Profile succesfully Rejected!');
     }
 }

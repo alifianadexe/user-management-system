@@ -20,8 +20,17 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kingdom ID</label>
-                                        <input class="form-control" type="number" name="kingdom_id"
-                                            value="{{ !isset($resources) ? '' : $resources['kingdom_id'] }}">
+                                        <select class="form-control" name="kingdom_id">
+                                            @foreach ($kingdoms as $i => $kingdom)
+                                                @if ($kingdom->id == $resources['kingdom_id'])
+                                                    <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                         @error('email')
                                             <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                         @enderror

@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Auth;
 use App\Models\Resource;
 use App\Models\Kingdoms;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-class ResourcesController extends Controller
+class ResourcesController extends CustomController
 {
-    private $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
-    private $kingdoms_list = [];
-    //
+
     public function index()
     {
         // $resources = DB::table('resources')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->get();
 
 
         $kingdoms = Kingdoms::all();
-        $this->kingdoms_list = $kingdoms;
 
         $resources = $this->get_resource();
 
@@ -39,66 +38,21 @@ class ResourcesController extends Controller
 
     public function show($id = null)
     {
-        $resources = null;
-        if ($id) {
+        if (isset($id)) {
             $id = decrypt($id);
             $resources = $this->get_resource($id);
+        } else {
+            $resources = $this->get_resources_detail($id);
         }
 
         $title = "Form Resource";
         $resources_name = $this->resources_name;
+        $kingdoms = Kingdoms::all();
 
-        return view('pages.resource.form', compact('resources', 'resources_name', 'title'));
+        return view('pages.resource.form', compact('resources', 'kingdoms', 'resources_name', 'title'));
     }
 
-    public function get_resource($kingdom_id = null)
-    {
-        $resources = [];
-        if ($kingdom_id != null) {
-            $kingdom = Kingdoms::where('id', $kingdom_id)->first();
-            $resources = $this->get_resources_detail($kingdom);
-        } else {
-            $kingdoms = $this->kingdoms_list;
-            foreach ($kingdoms as $kingdom) {
-                array_push($resources, $this->get_resources_detail($kingdom));
-            }
-        }
 
-
-        return $resources;
-    }
-
-    public function get_resources_detail($kingdom)
-    {
-        $resources = [];
-
-        $res = Resource::where('kingdom_id', $kingdom->id)->get();
-        $resources = [];
-
-        $resources['id'] = $kingdom->id;
-
-        $resources['desc'] = $kingdom->desc;
-        $resources['kingdom_id'] = $kingdom->kingdom_id;
-
-        foreach ($this->resources_name as $res_name) {
-
-            $resources[$res_name] = 0;
-            $resources[$res_name .  "_unit"] = 0;
-            $resources[$res_name . '_id'] = 0;
-
-            foreach ($res as $resource) {
-
-                if ($resource->resource_name == $res_name) {
-                    $resources[$res_name] = $resource->resource_price;
-                    $resources[$res_name . "_unit"] = $resource->unit;
-                    $resources[$res_name . "_id"] = $resource->id;
-                }
-            }
-        }
-        $resources['created_at'] = $kingdom->created_at;
-
-        return $resources;
-    }
 
     public function update(Request $request): RedirectResponse
     {

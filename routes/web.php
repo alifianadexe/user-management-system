@@ -71,9 +71,7 @@ Route::post('/kingdom/update', [KingdomController::class, 'update'])->name('king
 
 // Resource
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resources')->middleware('auth');
-Route::get('/resources/approve/{id}', [ResourcesController::class, 'approve'])->name('resources.approve')->middleware('auth');
 Route::get('/resources/delete/{id}', [ResourcesController::class, 'delete'])->name('resources.delete')->middleware('auth');
-Route::get('/resources/reject/{id}', [ResourcesController::class, 'reject'])->name('resources.reject')->middleware('auth');
 Route::get('/resources/edit/{id}', [ResourcesController::class, 'show'])->name('resources.edit')->middleware('auth');
 Route::get('/resources/show', [ResourcesController::class, 'show'])->name('resources.show')->middleware('auth');
 Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store')->middleware('auth');
@@ -90,8 +88,10 @@ Route::get('/transactions/delete', [ResourcesController::class, 'delete'])->name
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks')->middleware('auth');
 Route::get('/stocks/add', [StocksController::class, 'add'])->name('stocks.add')->middleware('auth');
 Route::post('/stocks', [StocksController::class, 'store'])->name('stocks.store')->middleware('auth');
+Route::get('/stocks/edit/{id}', [StocksController::class, 'show'])->name('stocks.edit')->middleware('auth');
 Route::get('/stocks/delete', [StocksController::class, 'delete'])->name('stocks.delete')->middleware('auth');
 Route::get('/stocks/show', [StocksController::class, 'show'])->name('stocks.show')->middleware('auth');
+Route::post('/stocks/update', [StocksController::class, 'update'])->name('stocks.update')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
