@@ -58,7 +58,7 @@
                                 @foreach ($resources_name as $i => $resource_name)
                                     <div class="row">
                                         {{-- Resource Name
-                                  (Stone, Food, Wood, Gold) --}}
+                                        (Stone, Food, Wood, Gold) --}}
 
                                         <input type="hidden" name="{{ strtolower($resource_name) . '_id' }}"
                                             value="{{ !empty($stocks) ? '' : $resources[$resource_name . '_id'] }}">
@@ -88,10 +88,43 @@
 
                                     </div>
                                 @endforeach
+                            @else
+                                <div class="row">
+                                    {{-- Resource Name
+                                    (Stone, Food, Wood, Gold) --}}
+
+                                    <input type="hidden" name="{{ strtolower($stocks->resource_name) . '_id' }}"
+                                        value="{{ !empty($stocks) ? $stocks->resource_id : '' }}">
+                                    <input type="hidden" name="kingdom_id"
+                                        value="{{ !empty($stocks) ? $stocks->resource_id : '' }}">
+                                    <input type="hidden" name="id" value="{{ !empty($stocks) ? $stocks->id : '' }}">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Resource
+                                                Name</label>
+                                            <input class="form-control" type="text"
+                                                name="resource_name_{{ strtolower($stocks->resource_name) }}"
+                                                value="{{ $stocks->resource_name }}" readonly>
+
+                                        </div>
+                                    </div>
+
+                                    {{-- Unit --}}
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Unit</label>
+                                            <input class="form-control" type="number" name="amount"
+                                                value="{{ !empty($stocks) ? $stocks->amount : 0 }}">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             @endif
                             {{-- Button Save --}}
                             <input type="hidden" name="id"
-                                value="{{ empty($stocks) ? '' : old('id', encrypt($stocks['id'])) }}">
+                                value="{{ empty($stocks) ? '' : old('id', encrypt($stocks->id)) }}">
                             <div class="card-header pb-0">
                                 <div>
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Submit</button>

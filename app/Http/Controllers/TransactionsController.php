@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Auth;
 use App\Models\Stocks;
 use App\Models\HistorySell;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class TransactionsController extends Controller
+class TransactionsController extends CustomController
 {
     public function index()
     {
-        $transactions = Stocks::orderBy('created_at', 'desc')->get();
+        $transactions = DB::table('transactions')
+            ->join('stocks', 'transactions.id', '=', 'stocks.transaction_id')
+            ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+            ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
+            ->join('users', 'users.id', '=', 'transactions.user_id')->orderBy('stocks.created_at')->get();
 
-        return view('pages.transaction.index', compact('transactions'));
+        $transactions = $this->group_per_transactions($transactions);
+        $resources_name = $this->resources_name;
+        // $this->debug($transactions);
+
+        return view('pages.transaction.index', compact('transactions', 'resources_name'));
     }
 
     public function store()

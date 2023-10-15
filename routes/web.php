@@ -76,20 +76,21 @@ Route::get('/resources/edit/{id}', [ResourcesController::class, 'show'])->name('
 Route::get('/resources/show', [ResourcesController::class, 'show'])->name('resources.show')->middleware('auth');
 Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store')->middleware('auth');
 Route::post('/resources/update', [ResourcesController::class, 'update'])->name('resources.update')->middleware('auth');
+Route::get('/resources/add', [ResourcesController::class, 'add'])->name('resources.add')->middleware('auth');
 
 // Transactions
 Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions')->middleware('auth');
-Route::get('/transactions', [ResourcesController::class, 'index'])->name('resources')->middleware('auth');
-Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('resources.add')->middleware('auth');
-Route::post('/transactions', [ResourcesController::class, 'store'])->name('resources.store')->middleware('auth');
-Route::get('/transactions/delete', [ResourcesController::class, 'delete'])->name('resources.delete')->middleware('auth');
+Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('transactions.add')->middleware('auth');
+Route::get('/transactions/edit/{id}', [ResourcesController::class, 'show'])->name('transactions.edit')->middleware('auth');
+Route::post('/transactions', [ResourcesController::class, 'store'])->name('transactions.store')->middleware('auth');
+Route::get('/transactions/delete', [ResourcesController::class, 'delete'])->name('transactions.delete')->middleware('auth');
 
 // Stocks
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks')->middleware('auth');
 Route::get('/stocks/add', [StocksController::class, 'add'])->name('stocks.add')->middleware('auth');
 Route::post('/stocks', [StocksController::class, 'store'])->name('stocks.store')->middleware('auth');
 Route::get('/stocks/edit/{id}', [StocksController::class, 'show'])->name('stocks.edit')->middleware('auth');
-Route::get('/stocks/delete', [StocksController::class, 'delete'])->name('stocks.delete')->middleware('auth');
+Route::get('/stocks/delete/{id}', [StocksController::class, 'delete'])->name('stocks.delete')->middleware('auth');
 Route::get('/stocks/show', [StocksController::class, 'show'])->name('stocks.show')->middleware('auth');
 Route::post('/stocks/update', [StocksController::class, 'update'])->name('stocks.update')->middleware('auth');
 

@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Kingdoms;
 use App\Models\Stocks;
 use App\Models\Resource;
+use App\Models\Transactions;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,7 @@ class StocksController extends CustomController
         // $stocks = Stocks::orderBy('created_at', 'desc')->get();
         $title = "List Stocks";
         $userId = Auth::id();
-        $stocks = DB::table('stocks')->where('stocks.user_id', $userId)->join('resources', 'resources.id', '=', 'stocks.resource_id')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->orderBy('stocks.created_at')->get();
+        $stocks = DB::table('stocks')->where('transactions.user_id', $userId)->join('transactions', 'transactions.id', '=', 'stocks.transaction_id')->join('resources', 'resources.id', '=', 'stocks.resource_id')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->orderBy('stocks.created_at')->get();
 
         // $this->debug($stocks);
 
@@ -43,16 +44,18 @@ class StocksController extends CustomController
 
         $userId = Auth::id();
 
+        $transaction_id = Transactions::insertGetId(['user_id' => $userId, 'status' => 'pending', 'created_at' => date('Y-m-d H:i:s')]);
+
         foreach ($resource_list as $i => $resource) {
             $stock = [];
 
             $amount = $resources_unit[strtolower($resource->resource_name)];
 
             if ($amount > 0) {
-                $stock['user_id'] = $userId;
+                $stock['transaction_id'] = $transaction_id;
                 $stock['resource_id'] = $resource->id;
                 $stock['amount'] = $amount;
-                $stock['status'] = 'pending';
+
                 $stock['created_at'] = date('Y-m-d H:i:s');
 
                 array_push($data, $stock);
@@ -90,28 +93,27 @@ class StocksController extends CustomController
 
     public function update()
     {
-        $validate = [
-            'email' => 'required|email|max:255',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
-            'ownership' => 'required',
-            'status' => 'required'
-        ];
-
         $stocks = request();
-        if (request()->password == null) {
-            unset($validate['password']);
-            unset($stocks['password']);
-        }
 
         $id = decrypt($stocks['id']);
 
-        $stocks = $stocks->validate($validate);
-        $stocks = Stocks::where('id', $id)->update($stocks);
+        // $this->debug($stocks->amount);
+
+        $stocks = Stocks::where('id', $id)->update([
+            'amount' => $stocks->amount
+        ]);
 
 
-        return back()->with('success', 'Profile succesfully updated');
+        return back()->with('success', 'Stocks succesfully updated');
+    }
+
+
+    public function delete($id)
+    {
+        $id = decrypt($id);
+
+        Stocks::where('id', $id)->delete();
+
+        return back()->with('success', 'Profile succesfully Deleted!');
     }
 }

@@ -88,4 +88,36 @@ class CustomController extends Controller
 
         return $resources;
     }
+
+    public function group_per_transactions($transactions)
+    {
+        if (!$transactions) {
+            return [];
+        }
+
+        $results = [];
+        foreach ($transactions as $key => $transaction) {
+
+            if (!array_key_exists($transaction->transaction_id, $results)) {
+                $payload = [];
+                $payload['kingdom_id'] = $transaction->kingdom_id;
+                $payload['firstname'] = $transaction->firstname;
+                $payload['lastname'] = $transaction->lastname;
+                $payload['status'] = $transaction->status;
+                $payload['created_at'] = $transaction->created_at;
+
+                $payload['resources'] = [];
+
+                foreach ($transactions as $cp_transactions) {
+                    foreach ($this->resources_name as $resource) {
+                        if ($transaction->transaction_id == $cp_transactions->transaction_id &&  $cp_transactions->resource_name == $resource) {
+                            $payload['resources'][$resource] = $cp_transactions->amount;
+                        }
+                    }
+                }
+                $results[$transaction->transaction_id] = $payload;
+            }
+        }
+        return $results;
+    }
 }
