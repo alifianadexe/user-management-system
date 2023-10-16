@@ -27,6 +27,8 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\KingdomController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\StocksController;
+use App\Http\Controllers\TransactionsController;
 
 Route::get('/', function () {
 	return redirect('/dashboard');
@@ -46,7 +48,7 @@ Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 
-// user Management
+// User Management
 Route::get('/users', [UsersController::class, 'index'])->name('user')->middleware('auth');
 Route::get('/users/approve/{id}', [UsersController::class, 'approve'])->name('user.approve')->middleware('auth');
 Route::get('/users/delete/{id}', [UsersController::class, 'delete'])->name('user.delete')->middleware('auth');
@@ -59,11 +61,38 @@ Route::post('/users/update', [UsersController::class, 'update'])->name('user.upd
 
 // Kingdoms
 Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
-
+Route::get('/kingdom/approve/{id}', [KingdomController::class, 'approve'])->name('kingdom.approve')->middleware('auth');
+Route::get('/kingdom/delete/{id}', [KingdomController::class, 'delete'])->name('kingdom.delete')->middleware('auth');
+Route::get('/kingdom/reject/{id}', [KingdomController::class, 'reject'])->name('kingdom.reject')->middleware('auth');
+Route::get('/kingdom/edit/{id}', [KingdomController::class, 'show'])->name('kingdom.edit')->middleware('auth');
+Route::get('/kingdom/show', [KingdomController::class, 'show'])->name('kingdom.show')->middleware('auth');
+Route::post('/kingdom', [KingdomController::class, 'store'])->name('kingdom.store')->middleware('auth');
+Route::post('/kingdom/update', [KingdomController::class, 'update'])->name('kingdom.update')->middleware('auth');
 
 // Resource
-Route::get('/resources', [ResourcesController::class, 'index'])->name('user')->middleware('auth');
+Route::get('/resources', [ResourcesController::class, 'index'])->name('resources')->middleware('auth');
+Route::get('/resources/delete/{id}', [ResourcesController::class, 'delete'])->name('resources.delete')->middleware('auth');
+Route::get('/resources/edit/{id}', [ResourcesController::class, 'show'])->name('resources.edit')->middleware('auth');
+Route::get('/resources/show', [ResourcesController::class, 'show'])->name('resources.show')->middleware('auth');
+Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store')->middleware('auth');
+Route::post('/resources/update', [ResourcesController::class, 'update'])->name('resources.update')->middleware('auth');
+Route::get('/resources/add', [ResourcesController::class, 'add'])->name('resources.add')->middleware('auth');
 
+// Transactions
+Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions')->middleware('auth');
+Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('transactions.add')->middleware('auth');
+Route::get('/transactions/edit/{id}', [ResourcesController::class, 'show'])->name('transactions.edit')->middleware('auth');
+Route::post('/transactions', [ResourcesController::class, 'store'])->name('transactions.store')->middleware('auth');
+Route::get('/transactions/delete', [ResourcesController::class, 'delete'])->name('transactions.delete')->middleware('auth');
+
+// Stocks
+Route::get('/stocks', [StocksController::class, 'index'])->name('stocks')->middleware('auth');
+Route::get('/stocks/add', [StocksController::class, 'add'])->name('stocks.add')->middleware('auth');
+Route::post('/stocks', [StocksController::class, 'store'])->name('stocks.store')->middleware('auth');
+Route::get('/stocks/edit/{id}', [StocksController::class, 'show'])->name('stocks.edit')->middleware('auth');
+Route::get('/stocks/delete/{id}', [StocksController::class, 'delete'])->name('stocks.delete')->middleware('auth');
+Route::get('/stocks/show', [StocksController::class, 'show'])->name('stocks.show')->middleware('auth');
+Route::post('/stocks/update', [StocksController::class, 'update'])->name('stocks.update')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
