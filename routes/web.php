@@ -61,9 +61,7 @@ Route::post('/users/update', [UsersController::class, 'update'])->name('user.upd
 
 // Kingdoms
 Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
-Route::get('/kingdom/approve/{id}', [KingdomController::class, 'approve'])->name('kingdom.approve')->middleware('auth');
 Route::get('/kingdom/delete/{id}', [KingdomController::class, 'delete'])->name('kingdom.delete')->middleware('auth');
-Route::get('/kingdom/reject/{id}', [KingdomController::class, 'reject'])->name('kingdom.reject')->middleware('auth');
 Route::get('/kingdom/edit/{id}', [KingdomController::class, 'show'])->name('kingdom.edit')->middleware('auth');
 Route::get('/kingdom/show', [KingdomController::class, 'show'])->name('kingdom.show')->middleware('auth');
 Route::post('/kingdom', [KingdomController::class, 'store'])->name('kingdom.store')->middleware('auth');
@@ -80,6 +78,7 @@ Route::get('/resources/add', [ResourcesController::class, 'add'])->name('resourc
 
 // Transactions
 Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions')->middleware('auth');
+Route::get('/transactions/accept', [ResourcesController::class, 'accept'])->name('transactions.accept')->middleware('auth');
 Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('transactions.add')->middleware('auth');
 Route::get('/transactions/edit/{id}', [ResourcesController::class, 'show'])->name('transactions.edit')->middleware('auth');
 Route::post('/transactions', [ResourcesController::class, 'store'])->name('transactions.store')->middleware('auth');
