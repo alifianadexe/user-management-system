@@ -23,7 +23,7 @@ class ResourcesController extends CustomController
 
         $title = "List Resources";
 
-        return view('pages.resource.index', compact('resources', 'title'));
+        return view('pages.resource.index', compact('resources', 'title', 'kingdoms'));
     }
 
     /**
@@ -32,8 +32,10 @@ class ResourcesController extends CustomController
     public function add()
     {
         $resources_name = $this->resources_name;
+        $kingdoms = Kingdoms::all();
+        $resources = [];
         $title = "Add Resource";
-        return view('pages.resource.form', compact("title", 'resources_name'));
+        return view('pages.resource.form', compact("title", 'resources', 'resources_name', 'kingdoms'));
     }
 
     public function show($id = null)

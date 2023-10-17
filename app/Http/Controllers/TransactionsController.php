@@ -6,6 +6,7 @@ use DB;
 use Auth;
 use App\Models\Stocks;
 use App\Models\HistorySell;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -26,33 +27,21 @@ class TransactionsController extends CustomController
         return view('pages.transaction.index', compact('transactions', 'resources_name'));
     }
 
-    public function store()
-    {
-        $transaction = request()->validate([
-            'email' => 'required|email|max:255|unique:transactions,email',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
-        ]);
-
-        // Set Attribute Default
-        $transaction['status'] = "pending";
-        $transaction['create_at'] = date('Y-m-d H:i:s');
-
-        $transaction = Stocks::create($transaction);
-
-        return redirect()->back()->with('msg', 'transaction Berhasil Dibuat!');
-    }
-
     public function show($id = null)
     {
         $transactions = null;
         if ($id) {
             $id = decrypt($id);
-            $transactions = Stocks::where('id', $id)->first();
+            $transactions = DB::table('transactions')
+                ->join('stocks', 'transactions.id', '=', 'stocks.transaction_id')
+                ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+                ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
+                ->join('users', 'users.id', '=', 'transactions.user_id')
+                ->where('transactions.id', $id)->orderBy('stocks.created_at')->get();
+            $transactions = $this->group_per_transactions($transactions);
         }
-        return view('pages.transaction.detail', compact('transactions'));
+        $resources_name = $this->resources_name;
+        return view('pages.transaction.detail', compact('transactions', 'resources_name'));
     }
 
     public function update()
@@ -85,7 +74,19 @@ class TransactionsController extends CustomController
     public function approve($id)
     {
         $id = decrypt($id);
-        Stocks::where('id', $id)->update(['status' => 'active']);
+
+        Transactions::where('id', $id)->update(['status' => 'approved']);
+
+        $stocks = DB::table('stocks')
+            ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+            ->where('transaction_id', $id)->get();
+
+        foreach ($stocks as $key => $stock) {
+            $stock['stocks_id'] = $stock->id;
+            $stock['qty'] = $stock->amount;
+            $stock['total_price'] = $stock->resource_price * $stock->amount;
+            $stock['stocks_id'] = $stock->id;
+        }
 
         return back()->with('success', 'Profile succesfully Approved!');
     }
