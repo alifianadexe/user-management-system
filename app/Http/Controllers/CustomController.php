@@ -103,7 +103,7 @@ class CustomController extends Controller
                 $payload['kingdom_id'] = $transaction->kingdom_id;
                 $payload['firstname'] = $transaction->firstname;
                 $payload['lastname'] = $transaction->lastname;
-                $payload['status'] = $transaction->status;
+                $payload['status'] = $transaction->status_transactions;
                 $payload['created_at'] = $transaction->created_at;
 
                 $payload['resources'] = [];

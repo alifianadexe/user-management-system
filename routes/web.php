@@ -77,12 +77,12 @@ Route::get('/resources/add', [ResourcesController::class, 'add'])->name('resourc
 
 // Transactions
 Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions')->middleware('auth');
-Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('transactions.add')->middleware('auth');
-Route::get('/transactions/edit/{id}', [ResourcesController::class, 'show'])->name('transactions.edit')->middleware('auth');
-Route::post('/transactions', [ResourcesController::class, 'store'])->name('transactions.store')->middleware('auth');
-Route::get('/transactions/delete', [ResourcesController::class, 'delete'])->name('transactions.delete')->middleware('auth');
-Route::get('/transactions/approve/{id}', [ResourcesController::class, 'approve'])->name('transactions.approve')->middleware('auth');
-Route::get('/transactions/reject/{id}', [ResourcesController::class, 'reject'])->name('transactions.reject')->middleware('auth');
+Route::get('/transactions/add', [TransactionsController::class, 'add'])->name('transactions.add')->middleware('auth');
+Route::get('/transactions/edit/{id}', [TransactionsController::class, 'show'])->name('transactions.edit')->middleware('auth');
+Route::post('/transactions', [TransactionsController::class, 'store'])->name('transactions.store')->middleware('auth');
+Route::get('/transactions/delete', [TransactionsController::class, 'delete'])->name('transactions.delete')->middleware('auth');
+Route::get('/transactions/approve/{id}', [TransactionsController::class, 'approve'])->name('transactions.approve')->middleware('auth');
+Route::get('/transactions/reject/{id}', [TransactionsController::class, 'reject'])->name('transactions.reject')->middleware('auth');
 
 // Stocks
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks')->middleware('auth');

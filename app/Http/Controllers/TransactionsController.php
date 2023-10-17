@@ -18,7 +18,9 @@ class TransactionsController extends CustomController
             ->join('stocks', 'transactions.id', '=', 'stocks.transaction_id')
             ->join('resources', 'resources.id', '=', 'stocks.resource_id')
             ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
-            ->join('users', 'users.id', '=', 'transactions.user_id')->orderBy('stocks.created_at')->get();
+            ->join('users', 'users.id', '=', 'transactions.user_id')
+            ->select('transactions.status as status_transactions', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*')
+            ->orderBy('stocks.created_at')->get();
 
         $transactions = $this->group_per_transactions($transactions);
         $resources_name = $this->resources_name;
@@ -37,6 +39,7 @@ class TransactionsController extends CustomController
                 ->join('resources', 'resources.id', '=', 'stocks.resource_id')
                 ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
                 ->join('users', 'users.id', '=', 'transactions.user_id')
+                ->select('transactions.status as status_transactions', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*')
                 ->where('transactions.id', $id)->orderBy('stocks.created_at')->get();
             $transactions = $this->group_per_transactions($transactions);
         }
@@ -82,28 +85,25 @@ class TransactionsController extends CustomController
             ->where('transaction_id', $id)->get();
 
         foreach ($stocks as $key => $stock) {
-            $stock['stocks_id'] = $stock->id;
-            $stock['qty'] = $stock->amount;
-            $stock['total_price'] = $stock->resource_price * $stock->amount;
-            $stock['stocks_id'] = $stock->id;
+            $history = [];
+            $history['stocks_id'] = $stock->id;
+            $history['qty'] = $stock->amount;
+            $history['total_price'] = $stock->resource_price * $stock->amount;
+            $history['stocks_id'] = $stock->id;
+            $history['created_at'] = date('Y-m-d H:i:s');
+
+            HistorySell::insert($history);
         }
 
-        return back()->with('success', 'Profile succesfully Approved!');
-    }
-
-    public function delete($id)
-    {
-        $id = decrypt($id);
-        Stocks::where('id', $id)->update(['status' => 'deleted']);
-
-        return back()->with('success', 'Profile succesfully Deleted!');
+        return back()->with('success', 'Transaction succesfully Approved!');
     }
 
     public function reject($id)
     {
         $id = decrypt($id);
-        Stocks::where('id', $id)->update(['status' => 'reject']);
 
-        return back()->with('success', 'Profile succesfully Rejected!');
+        Transactions::where('id', $id)->update(['status' => 'approved']);
+
+        return back()->with('success', 'Transaction succesfully Rejected!');
     }
 }

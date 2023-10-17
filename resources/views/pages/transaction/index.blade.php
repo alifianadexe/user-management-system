@@ -73,7 +73,7 @@
                                             @if ($transaction['status'] == 'pending')
                                                 <span
                                                     class="badge badge-sm bg-gradient-secondary">{{ $transaction['status'] }}</span>
-                                            @elseif ($transaction['status'] == 'active')
+                                            @elseif ($transaction['status'] == 'approved')
                                                 <span
                                                     class="badge badge-sm bg-gradient-success">{{ $transaction['status'] }}</span>
                                             @else
@@ -81,6 +81,8 @@
                                                     class="badge badge-sm bg-gradient-danger">{{ $transaction['status'] }}</span>
                                             @endif
                                         </td>
+
+
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $transaction['created_at'] }}</p>
                                         </td>
