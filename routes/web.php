@@ -62,6 +62,7 @@ Route::post('/users/update', [UsersController::class, 'update'])->name('user.upd
 // Kingdoms
 Route::get('/kingdom', [KingdomController::class, 'index'])->name('kingdom')->middleware('auth');
 Route::get('/kingdom/edit/{id}', [KingdomController::class, 'show'])->name('kingdom.edit')->middleware('auth');
+Route::get('/kingdom/delete/{id}', [KingdomController::class, 'delete'])->name('kingdom.delete')->middleware('auth');
 Route::get('/kingdom/show', [KingdomController::class, 'show'])->name('kingdom.show')->middleware('auth');
 Route::post('/kingdom', [KingdomController::class, 'store'])->name('kingdom.store')->middleware('auth');
 Route::post('/kingdom/update', [KingdomController::class, 'update'])->name('kingdom.update')->middleware('auth');
