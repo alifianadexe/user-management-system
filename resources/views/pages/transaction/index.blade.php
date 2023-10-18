@@ -57,7 +57,8 @@
                                         <td>
                                             <div class="d-flex px-3 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $transaction['firstname'] }} {{ $transaction['lastname'] }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $transaction['firstname'] }}
+                                                        {{ $transaction['lastname'] }}</h6>
                                                 </div>
                                             </div>
                                         <td>
@@ -74,7 +75,7 @@
                                             @if ($transaction['status'] == 'pending')
                                                 <span
                                                     class="badge badge-sm bg-gradient-secondary">{{ $transaction['status'] }}</span>
-                                            @elseif ($transaction['status'] == 'active')
+                                            @elseif ($transaction['status'] == 'approved')
                                                 <span
                                                     class="badge badge-sm bg-gradient-success">{{ $transaction['status'] }}</span>
                                             @else
@@ -82,6 +83,8 @@
                                                     class="badge badge-sm bg-gradient-danger">{{ $transaction['status'] }}</span>
                                             @endif
                                         </td>
+
+
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $transaction['created_at'] }}</p>
                                         </td>

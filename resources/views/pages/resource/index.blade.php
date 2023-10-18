@@ -10,30 +10,32 @@
                     <h6>Resource</h6>
                 </div>
                 <div class="card-header pb-0">
-                    <div class="col-md-13 text-end">
-                        <a href="{{ route('resources.add') }}" data-bs-toggle="tooltip" data-bs-title="Add"
-                            class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i> Add
-                        </a>
-                    </div>
+                    {{-- <div>
+                        <a href="{{ route('resources.add') }}" class="btn btn-primary btn-sm ms-auto">Add</a>
+                    </div> --}}
                 </div>
                 <div class="card-body px-2 pt-2 pb-5">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom ID
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom
+                                        ID
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Food
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Wood
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Stone
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Gold
                                     </th>
                                     <th
@@ -67,10 +69,6 @@
                                                 <a href="{{ route('resources.edit', ['id' => encrypt($resource['id'])]) }}"
                                                     data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
-                                                </a>
-                                                <a href="{{ route('resources.delete', ['id' => encrypt($resource['id'])]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete</p>
                                                 </a>
 
                                             </div>

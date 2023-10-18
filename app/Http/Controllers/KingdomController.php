@@ -7,10 +7,8 @@ use App\Models\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class KingdomController extends Controller
+class KingdomController extends CustomController
 {
-    private $resources_name = ["Stone", 'Food', 'Wood', 'Gold'];
-
     public function index()
     {
         $kingdoms = Kingdoms::orderBy('created_at', 'desc')->get();
@@ -66,11 +64,13 @@ class KingdomController extends Controller
             'desc' => 'required|min:12|max:255',
         ]);
 
+        $id = decrypt($kingdoms['id']);
+        unset($kingdoms['id']);
 
-        $kingdoms = Kingdoms::where('id', $kingdoms['id'])->update($kingdoms);
+        $kingdoms = Kingdoms::where('id', $id)->update($kingdoms);
 
 
-        return back()->with('success', 'Profile succesfully updated');
+        return back()->with('success', 'Kingdoms succesfully updated');
     }
 
     public function delete($id)
