@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>{{ $title }}</h6>
+                    <h6>Resource</h6>
                 </div>
                 <div class="card-header pb-0">
                     {{-- <div>
@@ -20,16 +20,22 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kingdom
-                                        ID</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Food
+                                        ID
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Food
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Wood
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Stone
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Gold
                                     </th>
                                     <th
@@ -40,10 +46,9 @@
                             <tbody>
                                 @foreach ($resources as $id => $resource)
                                     <tr>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle">
                                             <p class="text-sm font-weight-bold mb-0">{{ $resource['kingdom_id'] }}</p>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $resource['Food'] }}</p>
                                         </td>
@@ -51,7 +56,6 @@
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $resource['Wood'] }}</p>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $resource['Stone'] }}</p>
                                         </td>
@@ -59,11 +63,9 @@
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $resource['Gold'] }}</p>
                                         </td>
-
                                         {{-- Button Action --}}
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-
                                                 <a href="{{ route('resources.edit', ['id' => encrypt($resource['id'])]) }}"
                                                     data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>

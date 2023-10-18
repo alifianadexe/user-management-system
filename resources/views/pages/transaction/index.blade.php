@@ -54,11 +54,13 @@
                             <tbody>
                                 @foreach ($transactions as $transaction_id => $transaction)
                                     <tr>
-                                        <td class="align-middle  text-center text-sm">
-
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                {{ $transaction['firstname'] }} {{ $transaction['lastname'] }}</p>
-
+                                        <td>
+                                            <div class="d-flex px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $transaction['firstname'] }}
+                                                        {{ $transaction['lastname'] }}</h6>
+                                                </div>
+                                            </div>
                                         <td>
                                             <p class="text-sm font-weight-bold mb-0">{{ $transaction['kingdom_id'] }}</p>
                                         </td>
@@ -88,22 +90,17 @@
                                         </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-
-                                                <a href="{{ route('transactions.approve', ['id' => encrypt($transaction_id)]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Accept
-                                                    </p>
+                                                <a href="{{ route('transactions.accept', ['id' => encrypt($transaction_id)]) }}"
+                                                    data-bs-toggle="tooltip" data-bs-title="Accept" class="ms-2">
+                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Accept</p>
                                                 </a>
-
-                                                <a href="{{ route('transactions.reject', ['id' => encrypt($transaction_id)]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Reject
-                                                    </p>
-                                                </a>
-
                                                 <a href="{{ route('transactions.edit', ['id' => encrypt($transaction_id)]) }}"
                                                     data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
+                                                </a>
+                                                <a href="{{ route('transactions.delete', ['id' => encrypt($transaction_id)]) }}"
+                                                    data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
+                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Reject</p>
                                                 </a>
                                             </div>
                                         </td>

@@ -24,16 +24,18 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th
-                                        class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Kingdom
-                                        ID</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Kingdom ID
+                                    </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Description
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Create Date</th>
+                                        Created Date</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Updated Date</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
@@ -45,11 +47,14 @@
                                         <td class="align-middle text-center">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->kingdom_id }}</p>
                                         </td>
-                                        <td>
+                                        <td class="align-middle text-center text-sm" style="white-space: normal; word-wrap: break-word;">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->desc }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->created_at }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $kingdom->updated_at }}</p>
                                         </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">

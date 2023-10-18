@@ -73,14 +73,6 @@ class KingdomController extends CustomController
         return back()->with('success', 'Kingdoms succesfully updated');
     }
 
-    public function approve($id)
-    {
-        $id = decrypt($id);
-        Kingdoms::where('id', $id)->update(['status' => 'active']);
-
-        return back()->with('success', 'Profile succesfully Approved!');
-    }
-
     public function delete($id)
     {
         $id = decrypt($id);
@@ -89,13 +81,5 @@ class KingdomController extends CustomController
         Resource::where('kingdom_id', $id)->delete();
 
         return back()->with('success', 'Profile succesfully Deleted!');
-    }
-
-    public function reject($id)
-    {
-        $id = decrypt($id);
-        Kingdoms::where('id', $id)->update(['status' => 'reject']);
-
-        return back()->with('success', 'Profile succesfully Rejected!');
     }
 }

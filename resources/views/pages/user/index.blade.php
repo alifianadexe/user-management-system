@@ -23,10 +23,11 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -47,7 +48,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center text-sm">
                                                 <p class="text-sm font-weight-bold mb-0">{{ $user->ownership }}</p>
                                             </td>
                                             <td class="align-middle  text-center text-sm">
