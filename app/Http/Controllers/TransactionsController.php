@@ -102,7 +102,7 @@ class TransactionsController extends CustomController
     {
         $id = decrypt($id);
 
-        Transactions::where('id', $id)->update(['status' => 'approved']);
+        Transactions::where('id', $id)->update(['status' => 'reject']);
 
         return back()->with('success', 'Transaction succesfully Rejected!');
     }
