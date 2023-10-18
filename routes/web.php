@@ -83,7 +83,7 @@ Route::get('/transactions/approve', [ResourcesController::class, 'approve'])->na
 Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('transactions.add')->middleware('auth');
 Route::get('/transactions/edit/{id}', [ResourcesController::class, 'show'])->name('transactions.edit')->middleware('auth');
 Route::post('/transactions', [ResourcesController::class, 'store'])->name('transactions.store')->middleware('auth');
-Route::get('/transactions/delete', [ResourcesController::class, 'delete'])->name('transactions.delete')->middleware('auth');
+Route::get('/transactions/reject', [ResourcesController::class, 'reject'])->name('transactions.reject')->middleware('auth');
 
 // Stocks
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks')->middleware('auth');
