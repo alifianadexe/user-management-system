@@ -79,7 +79,7 @@ Route::get('/resources/add', [ResourcesController::class, 'add'])->name('resourc
 
 // Transactions
 Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions')->middleware('auth');
-Route::get('/transactions/accept', [ResourcesController::class, 'accept'])->name('transactions.accept')->middleware('auth');
+Route::get('/transactions/approve', [ResourcesController::class, 'approve'])->name('transactions.approve')->middleware('auth');
 Route::get('/transactions/add', [ResourcesController::class, 'add'])->name('transactions.add')->middleware('auth');
 Route::get('/transactions/edit/{id}', [ResourcesController::class, 'show'])->name('transactions.edit')->middleware('auth');
 Route::post('/transactions', [ResourcesController::class, 'store'])->name('transactions.store')->middleware('auth');
