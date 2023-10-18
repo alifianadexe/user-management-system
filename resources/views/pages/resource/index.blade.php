@@ -10,9 +10,9 @@
                     <h6>{{ $title }}</h6>
                 </div>
                 <div class="card-header pb-0">
-                    <div>
+                    {{-- <div>
                         <a href="{{ route('resources.add') }}" class="btn btn-primary btn-sm ms-auto">Add</a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="card-body px-2 pt-2 pb-5">
                     <div class="table-responsive p-0">
@@ -67,10 +67,6 @@
                                                 <a href="{{ route('resources.edit', ['id' => encrypt($resource['id'])]) }}"
                                                     data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
-                                                </a>
-                                                <a href="{{ route('resources.delete', ['id' => encrypt($resource['id'])]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete</p>
                                                 </a>
 
                                             </div>

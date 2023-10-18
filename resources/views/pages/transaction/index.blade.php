@@ -73,7 +73,7 @@
                                             @if ($transaction['status'] == 'pending')
                                                 <span
                                                     class="badge badge-sm bg-gradient-secondary">{{ $transaction['status'] }}</span>
-                                            @elseif ($transaction['status'] == 'active')
+                                            @elseif ($transaction['status'] == 'approved')
                                                 <span
                                                     class="badge badge-sm bg-gradient-success">{{ $transaction['status'] }}</span>
                                             @else
@@ -81,19 +81,29 @@
                                                     class="badge badge-sm bg-gradient-danger">{{ $transaction['status'] }}</span>
                                             @endif
                                         </td>
+
+
                                         <td class="align-middle text-center text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $transaction['created_at'] }}</p>
                                         </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
 
+                                                <a href="{{ route('transactions.approve', ['id' => encrypt($transaction_id)]) }}"
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
+                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Accept
+                                                    </p>
+                                                </a>
+
+                                                <a href="{{ route('transactions.reject', ['id' => encrypt($transaction_id)]) }}"
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
+                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Reject
+                                                    </p>
+                                                </a>
+
                                                 <a href="{{ route('transactions.edit', ['id' => encrypt($transaction_id)]) }}"
                                                     data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                     <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
-                                                </a>
-                                                <a href="{{ route('transactions.delete', ['id' => encrypt($transaction_id)]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete</p>
                                                 </a>
                                             </div>
                                         </td>
