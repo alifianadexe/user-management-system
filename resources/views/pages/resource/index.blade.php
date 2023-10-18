@@ -10,9 +10,6 @@
                     <h6>Resource</h6>
                 </div>
                 <div class="card-header pb-0">
-                    {{-- <div>
-                        <a href="{{ route('resources.add') }}" class="btn btn-primary btn-sm ms-auto">Add</a>
-                    </div> --}}
                 </div>
                 <div class="card-body px-2 pt-2 pb-5">
                     <div class="table-responsive p-0">
@@ -50,18 +47,18 @@
                                             <p class="text-sm font-weight-bold mb-0">{{ $resource['kingdom_id'] }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Food'] }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ number_format($resource['Food'], 0, ',', '.') }}</p>
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Wood'] }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ number_format($resource['Wood'], 0, ',', '.') }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Stone'] }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ number_format($resource['Stone'], 0, ',', '.') }}</p>
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $resource['Gold'] }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ number_format($resource['Gold'], 0, ',', '.') }}</p>
                                         </td>
                                         {{-- Button Action --}}
                                         <td class="align-middle text-end">
