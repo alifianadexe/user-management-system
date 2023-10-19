@@ -7,7 +7,7 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <img src="/img/anopics.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -40,8 +40,7 @@
                         <input type="hidden" name="id" value="{{ !isset($users) ? "" : old('id', encrypt($users->id)) }}">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0">{{ !isset($users) ? "Add" : "Edit" }} Profile</p>
-                                <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                <p class="mb-0">{{ !isset($users) ? "Add" : "Edit" }} User</p>
                             </div>
                         </div>
                         <div class="card-body">
@@ -125,15 +124,8 @@
                                 </div>
                             </div>
                             <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">Description</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Description User</label>
-                                        <input disabled class="form-control" type="text" name="about"
-                                            value="{{ !isset($users) ? "" : old('about', $users->about) }}">
-                                    </div>
-                                </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                             </div>
                         </div>
                     </form>

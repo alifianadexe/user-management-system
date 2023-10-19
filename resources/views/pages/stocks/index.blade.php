@@ -1,13 +1,13 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Tables'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Stocks'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Resource table</h6>
+                        <h6>Stocks table</h6>
                         <div class="col-md-10">
                         </div>
                         <div class="col-md-13 text-end">
@@ -58,12 +58,12 @@
                                             </td>
 
                                             <td class="align-middle text-center text-sm">
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stock->created_at }}</p>
+                                                <p class="text-sm font-weight-bold mb-0">{{ ($stock->amount / $stock->unit) * $stock->resource_price }}</p>
                                             </td>
 
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-sm font-weight-bold mb-0">
-                                                    {{ ($stock->amount / $stock->unit) * $stock->resource_price }}</p>
+                                                    {{ $stock->created_at }}</p>
                                             </td>
 
                                             {{-- Button Action --}}

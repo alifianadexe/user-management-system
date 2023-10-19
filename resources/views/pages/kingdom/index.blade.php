@@ -27,7 +27,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Kingdom ID
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Description
                                     </th>
                                     <th
@@ -47,7 +47,7 @@
                                         <td class="align-middle text-center">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->kingdom_id }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm" style="white-space: normal; word-wrap: break-word;">
+                                        <td class="align-middle text-left text-sm" style="white-space: normal; word-wrap: break-word;">
                                             <p class="text-sm font-weight-bold mb-0">{{ $kingdom->desc }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
