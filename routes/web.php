@@ -83,6 +83,7 @@ Route::get('/transactions/approve/{id}', [TransactionsController::class, 'approv
 Route::get('/transactions/add', [TransactionsController::class, 'add'])->name('transactions.add')->middleware('auth');
 Route::get('/transactions/edit/{id}', [TransactionsController::class, 'show'])->name('transactions.edit')->middleware('auth');
 Route::post('/transactions', [TransactionsController::class, 'store'])->name('transactions.store')->middleware('auth');
+Route::post('/transactions/update', [TransactionsController::class, 'update'])->name('transactions.update')->middleware('auth');
 Route::get('/transactions/reject/{id}', [TransactionsController::class, 'reject'])->name('transactions.reject')->middleware('auth');
 
 // Stocks

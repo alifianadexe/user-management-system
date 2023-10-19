@@ -107,11 +107,15 @@ class CustomController extends Controller
                 $payload['created_at'] = $transaction->created_at;
 
                 $payload['resources'] = [];
+                $payload['resources_price'] = [];
+                $payload['stock_id'] = [];
 
                 foreach ($transactions as $cp_transactions) {
                     foreach ($this->resources_name as $resource) {
                         if ($transaction->transaction_id == $cp_transactions->transaction_id &&  $cp_transactions->resource_name == $resource) {
                             $payload['resources'][$resource] = $cp_transactions->amount;
+                            $payload['resources_price'][$resource] = $cp_transactions->resource_price;
+                            $payload['stock_id'][$resource] = $cp_transactions->stock_id;
                         }
                     }
                 }
