@@ -100,12 +100,9 @@
                                                 </a>
                                                 <a href="{{ route('transactions.reject', ['id' => encrypt($transaction_id)]) }}"
                                                     data-bs-toggle="tooltip" data-bs-title="Reject" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Reject</p>
                                                 </a>
-                                            </div>
                                         </td>
                                     </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>

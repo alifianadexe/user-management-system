@@ -72,13 +72,13 @@
                                         </div>
                                     </div>
 
-                                    {{-- Unit --}}
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Unit</label>
-                                            <input class="form-control" type="number"
+                                            <input class="form-control" type="number" min="0"
                                                 name="unit_{{ strtolower($resource_name) }}"
-                                                value="{{ !isset($resources) ? 0 : $resources[$resource_name . '_unit'] }}">
+                                                value="{{ !isset($resources) ? 0 : $resources[$resource_name . '_unit'] }}"
+                                                disabled>
                                             @error('lastname')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror
@@ -90,7 +90,7 @@
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Resource
                                                 Price</label>
-                                            <input type="number" name="resource_price_{{ strtolower($resource_name) }}"
+                                            <input type="number" min="0" name="resource_price_{{ strtolower($resource_name) }}"
                                                 class="form-control"
                                                 value="{{ !isset($resources) ? 0 : $resources[$resource_name] }}">
                                             @error('password')
@@ -104,10 +104,8 @@
                             {{-- Button Save --}}
                             <input type="hidden" name="id"
                                 value="{{ !isset($resources) ? '' : old('id', encrypt($resources['id'])) }}">
-                            <div class="card-header pb-0">
-                                <div>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Submit</button>
-                                </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-sm ms-auto" style="margin-top: 20px;">Save</button>
                             </div>
                         </div>
                     </form>
