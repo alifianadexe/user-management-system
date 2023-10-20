@@ -6,6 +6,9 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
+                <div id="alert">
+                    @include('components.alert')
+                </div>
                 <div class="card">
                     {{-- Form --}}
                     <form role="form" method="POST"

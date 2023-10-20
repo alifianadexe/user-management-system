@@ -24,6 +24,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\KingdomController;
 use App\Http\Controllers\ResourcesController;
@@ -83,6 +84,7 @@ Route::get('/transactions/approve/{id}', [TransactionsController::class, 'approv
 Route::get('/transactions/add', [TransactionsController::class, 'add'])->name('transactions.add')->middleware('auth');
 Route::get('/transactions/edit/{id}', [TransactionsController::class, 'show'])->name('transactions.edit')->middleware('auth');
 Route::post('/transactions', [TransactionsController::class, 'store'])->name('transactions.store')->middleware('auth');
+Route::post('/transactions/update', [TransactionsController::class, 'update'])->name('transactions.update')->middleware('auth');
 Route::get('/transactions/reject/{id}', [TransactionsController::class, 'reject'])->name('transactions.reject')->middleware('auth');
 
 // Stocks
@@ -93,6 +95,15 @@ Route::get('/stocks/edit/{id}', [StocksController::class, 'show'])->name('stocks
 Route::get('/stocks/delete/{id}', [StocksController::class, 'delete'])->name('stocks.delete')->middleware('auth');
 Route::get('/stocks/show', [StocksController::class, 'show'])->name('stocks.show')->middleware('auth');
 Route::post('/stocks/update', [StocksController::class, 'update'])->name('stocks.update')->middleware('auth');
+
+// History Sell
+Route::get('/history_sell', [HistoryController::class, 'index'])->name('history')->middleware('auth');
+Route::get('/history_sell/add', [HistoryController::class, 'add'])->name('history.add')->middleware('auth');
+Route::post('/history_sell', [HistoryController::class, 'store'])->name('history.store')->middleware('auth');
+Route::get('/history_sell/edit/{id}', [HistoryController::class, 'show'])->name('history.edit')->middleware('auth');
+Route::get('/history_sell/delete/{id}', [HistoryController::class, 'delete'])->name('history.delete')->middleware('auth');
+Route::get('/history_sell/show', [HistoryController::class, 'show'])->name('history.show')->middleware('auth');
+Route::post('/history_sell/update', [HistoryController::class, 'update'])->name('history.update')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
