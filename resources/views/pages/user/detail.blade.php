@@ -87,13 +87,6 @@
                             <hr class="horizontal dark">
                             <p class="text-uppercase text-sm">Contact Information</p>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Address</label>
-                                        <input class="form-control" type="text" name="address"
-                                            value="{{ !isset($users) ? "" : old('address', $users->address) }}">
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Phone Number</label>
@@ -104,17 +97,20 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Ownership</label>
-                                        <select class="form-control mb-2" name="ownership">
-                                        <option value="owner" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='owner' ? 'selected' : ''  }}>Owner</option>
-                                        <option value="admin" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='admin' ? 'selected' : ''  }}>Admin</option>
-                                        <option value="user"  {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='user' ? 'selected' : ''  }}>User</option>
-                                        </select>
+                                        <div class="custom-select">
+                                            <select class="form-control mb-2" name="ownership" id="ownershipSelect">
+                                                <option value="owner" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='owner' ? 'selected' : ''  }}>Owner</option>
+                                                <option value="admin" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='admin' ? 'selected' : ''  }}>Admin</option>
+                                                <option value="user"  {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='user' ? 'selected' : ''  }}>User</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Status</label>
-                                        <select class="form-control mb-2" name="status">
+                                        <div class="custom-select">
+                                            <select class="form-control mb-2" name="status" id="statusSelect">
                                             <option value="active" {{ (!isset($users) ? "" : old('status', $users->status)) =='active' ? 'selected' : ''  }}>Active</option>
                                             <option value="reject" {{ (!isset($users) ? "" : old('status', $users->status)) =='reject' ? 'selected' : ''  }}>Rejected</option>
                                             <option value="deleted"  {{ (!isset($users) ? "" : old('status', $users->status)) =='deleted' ? 'selected' : ''  }}>Deleted</option>

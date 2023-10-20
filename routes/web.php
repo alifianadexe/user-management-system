@@ -48,6 +48,8 @@ Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
+Route::get('/profile', [ProfileController::class, 'index'])->name('user-profile')->middleware('auth');
+
 
 // User Management
 Route::get('/users', [UsersController::class, 'index'])->name('user')->middleware('auth');

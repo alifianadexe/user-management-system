@@ -50,9 +50,6 @@
                                     <input type="number" name="phone_number" class="form-control" placeholder="No. Handphone" aria-label="Phone" min="0">
                                     @error('phone_number') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
-                                <div class="flex flex-col mb-3">
-                                    <input type="text" name="address" class="form-control" placeholder="Address" aria-label="Name" >
-                                </div>
                                
                                 <div class="form-check form-check-info text-start">
                                     <input class="form-check-input" type="checkbox" name="terms" id="flexCheckDefault" >

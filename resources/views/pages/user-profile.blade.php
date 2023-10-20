@@ -41,13 +41,7 @@
                         <div class="card-body">
                             <p class="text-uppercase text-sm">User Information</p>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Username</label>
-                                        <input class="form-control" type="text" name="username" value="{{ old('username', auth()->user()->username) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email address</label>
                                         <input class="form-control" type="email" name="email" value="{{ old('email', auth()->user()->email) }}">
@@ -65,6 +59,13 @@
                                         <input class="form-control" type="text" name="lastname" value="{{ old('lastname', auth()->user()->lastname) }}">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Phone Number</label>
+                                        <input class="form-control" type="text" name="phone_number" value="{{ old('phone_number', auth()->user()->phone_number) }}">
+                                        <label>Gunakan nomor ponsel yang sama untuk WhatsApp dan e-wallet</label>
+                                    </div>
+                                </div>
                             </div>
                             <hr class="horizontal dark">
                             <p class="text-uppercase text-sm">Contact Information</p>
@@ -74,17 +75,6 @@
                                         <label for="example-text-input" class="form-control-label">Address</label>
                                         <input class="form-control" type="text" name="address"
                                             value="{{ old('address', auth()->user()->address) }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">About me</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">About me</label>
-                                        <input class="form-control" type="text" name="about"
-                                            value="{{ old('about', auth()->user()->about) }}">
                                     </div>
                                 </div>
                             </div>

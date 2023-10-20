@@ -56,11 +56,12 @@
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-sm font-weight-bold mb-0">{{ $stock->amount }}</p>
                                             </td>
-
                                             <td class="align-middle text-center text-sm">
                                                 <?php $unit = $stock->unit <= 0 ? 1 : $stock->unit; ?>
+                                                <?php $totalPrice = ($stock->amount / $unit) * $stock->resource_price; ?>
                                                 <p class="text-sm font-weight-bold mb-0">
-                                                    {{ ($stock->amount / $unit) * $stock->resource_price }}</p>
+                                                    {{ 'Rp ' . number_format($totalPrice, 0, ',', '.') }}
+                                                </p>
                                             </td>
 
                                             <td class="align-middle text-center text-sm">

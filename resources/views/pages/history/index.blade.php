@@ -77,7 +77,7 @@
 
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-sm font-weight-bold mb-0">
-                                                    {{ $history->total_price }}</p>
+                                                    {{ 'Rp ' . number_format($history->total_price, 0, ',', '.') }}</p>
                                             </td>
 
                                             <td class="align-middle  text-center text-sm">

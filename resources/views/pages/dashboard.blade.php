@@ -12,7 +12,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Trasactions</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $historySum }}
+                                        {{ 'Rp ' . number_format($historySum, 0, ',', '.') }}
                                     </h5>
                                 </div>
                             </div>
@@ -33,13 +33,13 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Users</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $userCount }}
+                                        {{ number_format($userCount, 0, ',', '.') }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                <div class="icon icon-shape bg-gradient-success shadow-danger text-center rounded-circle">
+                                    <i class="ni ni-satisfied text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -54,13 +54,13 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Pending Transactions</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $transactionCount }}
+                                        {{ number_format($transactionCount, 0, ',', '.') }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                <div class="icon icon-shape bg-gradient-secondary shadow-success text-center rounded-circle">
+                                    <i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                                         {{ ucwords($resource->resource_name) }}:
                                                     </p>
                                                     <h6 class="text-sm mb-0">{{ $resource->unit }} M :
-                                                        {{ 'Rp ' . number_format($resource->resource_price) }}</h6>
+                                                        {{ 'Rp ' . number_format($resource->resource_price, 0, ',', '.') }}</h6>
                                                 </div>
                                             </td>
                                         @endforeach
