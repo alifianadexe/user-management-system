@@ -40,7 +40,8 @@ class TransactionsController extends CustomController
                 ->join('resources', 'resources.id', '=', 'stocks.resource_id')
                 ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
                 ->join('users', 'users.id', '=', 'transactions.user_id')
-                ->select('transactions.status as status_transactions', 'stocks.id as stock_id', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*')
+                ->leftJoin('history_sells', 'stocks.id', '=', 'history_sells.stocks_id')
+                ->select('transactions.status as status_transactions', 'stocks.id as stock_id', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*', 'history_sells.qty')
                 ->where('transactions.id', $id)->orderBy('stocks.created_at')->get();
             $transactions = $this->group_per_transactions($transactions);
             $transactions = $transactions[$id];
@@ -82,13 +83,17 @@ class TransactionsController extends CustomController
 
         $stocks = DB::table('stocks')
             ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+            ->select('stocks.id as stocks_id', 'stocks.*', 'resources.*')
             ->where('transaction_id', $id)->get();
 
         foreach ($stocks as $key => $stock) {
             $history = [];
-            $history['stocks_id'] = $stock->id;
+            $history['stocks_id'] = $stock->stocks_id;
             $history['qty'] = $stock->amount;
-            $history['total_price'] = $stock->resource_price * $stock->amount;
+
+            $unit = $stock->unit <= 0 ? 1 : $stock->unit;
+            $history['total_price'] = ($stock->amount / $unit) * $stock->resource_price;
+
             $history['created_at'] = date('Y-m-d H:i:s');
 
             HistorySell::insert($history);
