@@ -78,10 +78,10 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Unit</label>
-                                            <input class="form-control" type="number" min="0"
+                                            <input class="form-control readonly" type="number" min="1"
                                                 name="unit_{{ strtolower($resource_name) }}"
-                                                value="{{ !isset($resources) ? 0 : $resources[$resource_name . '_unit'] }}"
-                                                disabled>
+                                                value="{{ !isset($resources) ? 1 : $resources[$resource_name . '_unit'] }}"
+                                                readonly>
                                             @error('lastname')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror
