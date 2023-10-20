@@ -19,7 +19,8 @@ class TransactionsController extends CustomController
             ->join('resources', 'resources.id', '=', 'stocks.resource_id')
             ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
             ->join('users', 'users.id', '=', 'transactions.user_id')
-            ->select('transactions.status as status_transactions',  'stocks.id as stock_id', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*')
+            ->leftJoin('history_sells', 'stocks.id', '=', 'history_sells.stocks_id')
+            ->select('transactions.status as status_transactions',  'stocks.id as stock_id', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*', 'history_sells.qty')
             ->orderBy('stocks.created_at')->get();
 
         $transactions = $this->group_per_transactions($transactions);

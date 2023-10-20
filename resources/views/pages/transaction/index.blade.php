@@ -67,7 +67,12 @@
                                         @foreach ($resources_name as $resource_name)
                                             <td>
                                                 <p class="text-sm font-weight-bold mb-0">
-                                                    {{ $transaction['resources'][$resource_name] }}</p>
+                                                    @if ($transaction['status'] == 'approved')
+                                                        {{ $transaction['qty_accept'][$resource_name] }}
+                                                    @else
+                                                        {{ $transaction['resources'][$resource_name] }}
+                                                    @endif
+                                                </p>
                                             </td>
                                         @endforeach
 
@@ -90,18 +95,23 @@
                                         </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                <a href="{{ route('transactions.approve', ['id' => encrypt($transaction_id)]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Approve" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Approve</p>
-                                                </a>
-                                                <a href="{{ route('transactions.edit', ['id' => encrypt($transaction_id)]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit</p>
-                                                </a>
-                                                <a href="{{ route('transactions.reject', ['id' => encrypt($transaction_id)]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-title="Reject" class="ms-2">
-                                                    <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Reject</p>
-                                                </a>
+                                                @if ($transaction['status'] == 'pending')
+                                                    <a href="{{ route('transactions.approve', ['id' => encrypt($transaction_id)]) }}"
+                                                        data-bs-toggle="tooltip" data-bs-title="Approve" class="ms-2">
+                                                        <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Approve
+                                                        </p>
+                                                    </a>
+                                                    <a href="{{ route('transactions.edit', ['id' => encrypt($transaction_id)]) }}"
+                                                        data-bs-toggle="tooltip" data-bs-title="Adjust" class="ms-2">
+                                                        <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Adjust
+                                                        </p>
+                                                    </a>
+                                                    <a href="{{ route('transactions.reject', ['id' => encrypt($transaction_id)]) }}"
+                                                        data-bs-toggle="tooltip" data-bs-title="Reject" class="ms-2">
+                                                        <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Reject
+                                                        </p>
+                                                    </a>
+                                                @endif
                                         </td>
                                     </tr>
                                 @endforeach

@@ -109,6 +109,7 @@ class CustomController extends Controller
                 $payload['resources'] = [];
                 $payload['resources_price'] = [];
                 $payload['stock_id'] = [];
+                $payload['qty_accept'] = [];
 
                 foreach ($transactions as $cp_transactions) {
                     foreach ($this->resources_name as $resource) {
@@ -116,6 +117,7 @@ class CustomController extends Controller
                             $payload['resources'][$resource] = $cp_transactions->amount;
                             $payload['resources_price'][$resource] = $cp_transactions->resource_price;
                             $payload['stock_id'][$resource] = $cp_transactions->stock_id;
+                            $payload['qty_accept'][$resource] = $cp_transactions->qty;
                         }
                     }
                 }
