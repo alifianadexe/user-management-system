@@ -67,10 +67,15 @@
                                         @foreach ($resources_name as $resource_name)
                                             <td>
                                                 <p class="text-sm font-weight-bold mb-0">
-                                                    @if ($transaction['status'] == 'approved')
-                                                        {{ $transaction['qty_accept'][$resource_name] }}
+                                                    @if (array_key_exists($resource_name, $transaction['qty_accept']) &&
+                                                            array_key_exists($resource_name, $transaction['resources']))
+                                                        @if ($transaction['status'] == 'approved')
+                                                            {{ $transaction['qty_accept'][$resource_name] }}
+                                                        @else
+                                                            {{ $transaction['resources'][$resource_name] }}
+                                                        @endif
                                                     @else
-                                                        {{ $transaction['resources'][$resource_name] }}
+                                                        0
                                                     @endif
                                                 </p>
                                             </td>

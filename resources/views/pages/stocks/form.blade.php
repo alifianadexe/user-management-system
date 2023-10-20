@@ -120,7 +120,7 @@
                             @endif
                             {{-- Button Save --}}
                             <input type="hidden" name="id"
-                                value="{{ empty($stocks) ? '' : old('id', encrypt($stocks->id)) }}">
+                                value="{{ empty($stocks) ? '' : old('id', encrypt($stocks->stocks_id_main)) }}">
                             <div class="card-header pb-0">
                                 <div>
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Submit</button>
