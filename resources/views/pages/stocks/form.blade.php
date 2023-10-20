@@ -27,7 +27,9 @@
                                             <select class="form-control" name="kingdom_id">
                                                 @foreach ($kingdoms as $i => $kingdom)
                                                     @if ($kingdom->id == $resources['kingdom_id'])
-                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
+                                                        <option selected value="{{ $kingdom->id }}">
+                                                            {{ $kingdom->kingdom_id }}
+
                                                         </option>
                                                     @else
                                                         <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
@@ -127,7 +129,7 @@
                             @endif
                             {{-- Button Save --}}
                             <input type="hidden" name="id"
-                                value="{{ empty($stocks) ? '' : old('id', encrypt($stocks->id)) }}">
+                                value="{{ empty($stocks) ? '' : old('id', encrypt($stocks->stocks_id_main)) }}">
                             <div class="card-header pb-0">
                                 <div>
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Submit</button>

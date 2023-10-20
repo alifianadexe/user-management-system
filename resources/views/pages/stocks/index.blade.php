@@ -46,7 +46,7 @@
                                     @foreach ($stocks as $i => $stock)
                                         <tr>
                                             <td class="align-middle text-center text-sm">
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stock->kingdom_id }}</p>
+                                                <p class="text-sm font-weight-bold mb-0">{{ $stock->kingdom_id_at }}</p>
                                             </td>
 
                                             <td class="align-middle text-center text-sm">
@@ -65,20 +65,20 @@
 
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-sm font-weight-bold mb-0">
-                                                    {{ $stock->created_at }}</p>
+                                                    {{ $stock->created_at_time }}</p>
                                             </td>
 
                                             {{-- Button Action --}}
                                             <td class="align-middle text-end">
                                                 <div class="d-flex px-3 py-1 justify-content-center align-items-center">
 
-                                                    <a href="{{ route('stocks.edit', ['id' => encrypt($stock->id)]) }}"
+                                                    <a href="{{ route('stocks.edit', ['id' => encrypt($stock->stocks_id_main)]) }}"
                                                         data-bs-toggle="tooltip" data-bs-title="Edit" class="ms-2">
                                                         <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Edit
                                                         </p>
                                                     </a>
 
-                                                    <a href="{{ route('stocks.delete', ['id' => encrypt($stock->id)]) }}"
+                                                    <a href="{{ route('stocks.delete', ['id' => encrypt($stock->stocks_id_main)]) }}"
                                                         data-bs-toggle="tooltip" data-bs-title="Delete" class="ms-2">
                                                         <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete
                                                         </p>

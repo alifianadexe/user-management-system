@@ -21,7 +21,12 @@ class StocksController extends CustomController
         // $stocks = Stocks::orderBy('created_at', 'desc')->get();
         $title = "List Stocks";
         $userId = Auth::id();
-        $stocks = DB::table('stocks')->where('transactions.user_id', $userId)->join('transactions', 'transactions.id', '=', 'stocks.transaction_id')->join('resources', 'resources.id', '=', 'stocks.resource_id')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->orderBy('stocks.created_at')->get();
+        $stocks = DB::table('stocks')->where('transactions.user_id', $userId)
+            ->join('transactions', 'transactions.id', '=', 'stocks.transaction_id')
+            ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+            ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
+            ->select('stocks.id as stocks_id_main', 'stocks.created_at as created_at_time', 'kingdoms.kingdom_id as kingdom_id_at', 'stocks.*', 'kingdoms.*', 'transactions.*', 'resources.*')
+            ->orderBy('stocks.created_at')->get();
 
         // $this->debug($stocks);
 
@@ -76,7 +81,16 @@ class StocksController extends CustomController
 
         if (isset($id)) {
             $id = decrypt($id);
-            $stocks = DB::table('stocks')->where('stocks.id', $id)->join('resources', 'resources.id', '=', 'stocks.resource_id')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->first();
+            // $this->debug($id);
+            $stocks = DB::table('stocks')
+                ->where('stocks.id', $id)
+                ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+                ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
+                ->select('stocks.id as stocks_id_main', 'stocks.created_at as created_at_time', 'kingdoms.kingdom_id as kingdom_id_at', 'stocks.*', 'kingdoms.*', 'resources.*')
+                ->first();
+
+            $kingdoms = Kingdoms::where('id', $stocks->kingdom_id)->first();
+            $resources =  $this->get_resources_detail($kingdoms);
         } else {
             $resources = $this->get_resources_detail($id);
         }
@@ -86,7 +100,7 @@ class StocksController extends CustomController
         $resources_name = $this->resources_name;
         $kingdoms = Kingdoms::all();
 
-        // $this->debug($stocks);
+        // $this->debug($resources);
 
         return view('pages.stocks.form', compact('resources', 'stocks', 'kingdoms', 'title', 'resources_name'));
     }
@@ -96,8 +110,6 @@ class StocksController extends CustomController
         $stocks = request();
 
         $id = decrypt($stocks['id']);
-
-        // $this->debug($stocks->amount);
 
         $stocks = Stocks::where('id', $id)->update([
             'amount' => $stocks->amount
