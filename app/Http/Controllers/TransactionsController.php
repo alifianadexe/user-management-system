@@ -19,7 +19,8 @@ class TransactionsController extends CustomController
             ->join('resources', 'resources.id', '=', 'stocks.resource_id')
             ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
             ->join('users', 'users.id', '=', 'transactions.user_id')
-            ->select('transactions.status as status_transactions', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*')
+            ->leftJoin('history_sells', 'stocks.id', '=', 'history_sells.stocks_id')
+            ->select('transactions.status as status_transactions',  'stocks.id as stock_id', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*', 'history_sells.qty')
             ->orderBy('stocks.created_at')->get();
 
         $transactions = $this->group_per_transactions($transactions);
@@ -39,37 +40,37 @@ class TransactionsController extends CustomController
                 ->join('resources', 'resources.id', '=', 'stocks.resource_id')
                 ->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')
                 ->join('users', 'users.id', '=', 'transactions.user_id')
-                ->select('transactions.status as status_transactions', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*')
+                ->leftJoin('history_sells', 'stocks.id', '=', 'history_sells.stocks_id')
+                ->select('transactions.status as status_transactions', 'stocks.id as stock_id', 'transactions.*', 'stocks.*', 'resources.*', 'kingdoms.*', 'users.*', 'history_sells.qty')
                 ->where('transactions.id', $id)->orderBy('stocks.created_at')->get();
             $transactions = $this->group_per_transactions($transactions);
+            $transactions = $transactions[$id];
+            $transactions['transaction_id'] = $id;
         }
         $resources_name = $this->resources_name;
-        return view('pages.transaction.detail', compact('transactions', 'resources_name'));
+
+        // $this->debug($transactions);
+        $title = 'Transactions Form';
+        return view('pages.transaction.form', compact('transactions', 'resources_name', 'title'));
     }
 
     public function update()
     {
-        $validate = [
-            'email' => 'required|email|max:255',
-            'password' => 'required|confirmed|min:8|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone_number' => 'required|min:12|max:255',
-            'ownership' => 'required',
-            'status' => 'required'
-        ];
 
-        $transaction = request();
-        if (request()->password == null) {
-            unset($validate['password']);
-            unset($transaction['password']);
+        $transactions = request();
+        $id = decrypt($transactions['id']);
+
+        Transactions::where('id', $id)->update(['status' => 'approved']);
+
+        foreach ($this->resources_name as $key => $resource) {
+            $history = [];
+            $history['stocks_id'] = $transactions['stock_id_' . strtolower($resource)];
+            $history['qty'] = $transactions[strtolower($resource)];
+            $history['total_price'] = $transactions['resource_price_' . strtolower($resource)];
+            $history['created_at'] = date('Y-m-d H:i:s');
+
+            HistorySell::insert($history);
         }
-
-        $id = decrypt($transaction['id']);
-
-        $transaction = $transaction->validate($validate);
-        $transaction = Stocks::where('id', $id)->update($transaction);
-
 
         return back()->with('success', 'Profile succesfully updated');
     }
@@ -82,14 +83,17 @@ class TransactionsController extends CustomController
 
         $stocks = DB::table('stocks')
             ->join('resources', 'resources.id', '=', 'stocks.resource_id')
+            ->select('stocks.id as stocks_id', 'stocks.*', 'resources.*')
             ->where('transaction_id', $id)->get();
 
         foreach ($stocks as $key => $stock) {
             $history = [];
-            $history['stocks_id'] = $stock->id;
+            $history['stocks_id'] = $stock->stocks_id;
             $history['qty'] = $stock->amount;
-            $history['total_price'] = $stock->resource_price * $stock->amount;
-            $history['stocks_id'] = $stock->id;
+
+            $unit = $stock->unit <= 0 ? 1 : $stock->unit;
+            $history['total_price'] = ($stock->amount / $unit) * $stock->resource_price;
+
             $history['created_at'] = date('Y-m-d H:i:s');
 
             HistorySell::insert($history);

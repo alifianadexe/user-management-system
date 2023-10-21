@@ -6,6 +6,9 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
+                <div id="alert">
+                    @include('components.alert')
+                </div>
                 <div class="card">
                     {{-- Form --}}
                     <form role="form" method="POST"
@@ -75,10 +78,10 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Unit</label>
-                                            <input class="form-control" type="number" min="0"
+                                            <input class="form-control readonly" type="number" min="1"
                                                 name="unit_{{ strtolower($resource_name) }}"
-                                                value="{{ !isset($resources) ? 0 : $resources[$resource_name . '_unit'] }}"
-                                                disabled>
+                                                value="{{ !isset($resources) ? 1 : $resources[$resource_name . '_unit'] }}"
+                                                readonly>
                                             @error('lastname')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror
@@ -90,8 +93,8 @@
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Resource
                                                 Price</label>
-                                            <input type="number" min="0" name="resource_price_{{ strtolower($resource_name) }}"
-                                                class="form-control"
+                                            <input type="number" min="0"
+                                                name="resource_price_{{ strtolower($resource_name) }}" class="form-control"
                                                 value="{{ !isset($resources) ? 0 : $resources[$resource_name] }}">
                                             @error('password')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
@@ -105,7 +108,8 @@
                             <input type="hidden" name="id"
                                 value="{{ !isset($resources) ? '' : old('id', encrypt($resources['id'])) }}">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-sm ms-auto" style="margin-top: 20px;">Save</button>
+                                <button type="submit" class="btn btn-primary btn-sm ms-auto"
+                                    style="margin-top: 20px;">Save</button>
                             </div>
                         </div>
                     </form>
