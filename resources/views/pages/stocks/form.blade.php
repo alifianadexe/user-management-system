@@ -74,7 +74,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Unit</label>
-                                                <input class="form-control" type="number"
+                                                <input class="form-control" type="number" min="1"
                                                     name="unit_{{ strtolower($resource_name) }}"
                                                     value="{{ !empty($stocks) ? 0 : $resources[$resource_name . '_unit'] }}">
 
