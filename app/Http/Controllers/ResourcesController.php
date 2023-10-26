@@ -16,7 +16,6 @@ class ResourcesController extends CustomController
     {
         // $resources = DB::table('resources')->join('kingdoms', 'kingdoms.id', '=', 'resources.kingdom_id')->get();
 
-
         $kingdoms = Kingdoms::all();
 
         $resources = $this->get_resource();

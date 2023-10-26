@@ -5,15 +5,15 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckRole
+class CheckUserStatus
 {
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, $status)
     {
-        if (auth()->check() && auth()->user()->ownership != $role)
+        if (auth()->check() && auth()->user()->status == $status)
         {
             return $next($request);
         }
-    
+
         return redirect('/');
     }
 }
