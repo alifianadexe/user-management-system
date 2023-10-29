@@ -2,7 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => $title])
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
@@ -15,7 +17,6 @@
                         action={{ isset($resources) ? route('resources.update') : route('resources.store') }}
                         enctype="multipart/form-data">
                         @csrf
-
                         <div class="card-body">
 
                             {{-- Kingdom ID --}}
@@ -23,36 +24,27 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kingdom ID</label>
-                                        <select class="form-control" name="kingdom_id">
-                                            @foreach ($kingdoms as $i => $kingdom)
-                                                @if ($kingdom->id == $resources['kingdom_id'])
-                                                    <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
+                                        <div class="custom-select">
+                                            <select class="form-control" name="kingdom_id">
+                                                @foreach ($kingdoms as $i => $kingdom)
+                                                    @if ($kingdom->id == $resources['kingdom_id'])
+                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}</option>
+                                                    @else
+                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         @error('email')
                                             <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-
-                            {{-- Description --}}
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Description</label>
-                                        <input class="form-control" type="text" name="description"
-                                            value="{{ !isset($resources) ? '' : $resources['desc'] }}">
-                                        @error('firstname')
-                                            <p class='text-danger text-xs pt-1'> {{ $message }} </p>
-                                        @enderror
-                                    </div>
-                                </div>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('select').select2();
+                                        });
+                                    </script>
                             </div>
 
                             @foreach ($resources_name as $i => $resource_name)
@@ -78,10 +70,9 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Unit</label>
-                                            <input class="form-control readonly" type="number" min="1"
+                                            <input class="form-control" type="number" min="1"
                                                 name="unit_{{ strtolower($resource_name) }}"
-                                                value="{{ !isset($resources) ? 1 : $resources[$resource_name . '_unit'] }}"
-                                                readonly>
+                                                value="{{ !isset($resources) ? 1 : $resources[$resource_name . '_unit'] }}">
                                             @error('lastname')
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror

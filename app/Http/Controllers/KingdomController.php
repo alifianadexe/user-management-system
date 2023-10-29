@@ -70,7 +70,7 @@ class KingdomController extends CustomController
         $kingdoms = Kingdoms::where('id', $id)->update($kingdoms);
 
 
-        return back()->with('success', 'Kingdoms succesfully updated');
+        return back()->with('success', 'Kingdoms succesfully Updated');
     }
 
     public function delete($id)
@@ -80,6 +80,6 @@ class KingdomController extends CustomController
         Kingdoms::where('id', $id)->delete();
         Resource::where('kingdom_id', $id)->delete();
 
-        return back()->with('success', 'Profile succesfully Deleted!');
+        return back()->with('success', 'Kingdoms succesfully Deleted!');
     }
 }

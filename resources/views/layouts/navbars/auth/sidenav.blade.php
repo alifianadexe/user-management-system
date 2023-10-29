@@ -21,52 +21,66 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item mt-3 d-flex align-items-center">
-                <div class="ps-4">
-                </div>
-                <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Menu</h6>
-            </li>
-            <li class="nav-item">
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'active' : '' }}"
-                    href="{{ route('page', ['page' => 'users']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+            @if(auth()->user()->status == 'active')
+            <div>
+                @if(auth()->user()->ownership == 'admin' || auth()->user()->ownership == 'owner')
+                <li class="nav-item mt-3 d-flex align-items-center">
+                    <div class="ps-4">
                     </div>
-                    <span class="nav-link-text ms-1">User Management</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'kingdom') == true ? 'active' : '' }}"
-                    href="{{ route('page', ['page' => 'kingdom']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Kingdom Management</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'resources') == true ? 'active' : '' }}"
-                    href="{{ route('page', ['page' => 'resources']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Resource Management</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'transactions') == true ? 'active' : '' }}"
-                    href="{{ route('page', ['page' => 'transactions']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Transactions</span>
-                </a>
-            </li>
+                    <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Menu</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'active' : '' }}"
+                        href="{{ route('page', ['page' => 'users']) }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">User Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'kingdom') == true ? 'active' : '' }}"
+                        href="{{ route('page', ['page' => 'kingdom']) }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Kingdom Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'resources') == true ? 'active' : '' }}"
+                        href="{{ route('page', ['page' => 'resources']) }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Resource Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'transactions') == true ? 'active' : '' }}"
+                        href="{{ route('page', ['page' => 'transactions']) }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Transactions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'sales') == true ? 'active' : '' }}"
+                        href="{{ route('page', ['page' => 'sales']) }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sales</span>
+                    </a>
+                </li>
+                @endif
+            </div>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
             </li>
@@ -90,6 +104,7 @@
                     <span class="nav-link-text ms-1">History Sell</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
             </li>
