@@ -11,8 +11,7 @@
                 </div>
                 <div class="card">
                     {{-- Form --}}
-                    <form role="form" method="POST" action={{ route('transactions.update') }}
-                        enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('sales.insert') }}>
                         @csrf
 
                         <div class="card-body">
@@ -22,38 +21,31 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kingdom ID</label>
-                                        <select class="form-control" name="kingdom_id">
-                                            <option value="{{ $transactions['kingdom_id'] }}">
-                                                {{ $transactions['kingdom_id'] }}
-                                            </option>
-                                        </select>
+                                        <input class="form-control" type="text"
+                                            value="{{ $sale->kingdom }}"
+                                            readonly>
                                     </div>
                                 </div>
                             </div>
 
-                            @foreach ($resources_name as $i => $resource)
+                            {{-- Resource Name (Stone, Food, Wood, Gold) --}}
+                            @foreach ($sale->resources as $i => $resource)
                                 <div class="row">
-                                    {{-- Resource Name
-                                  (Stone, Food, Wood, Gold) --}}
-
-
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Resource Name</label>
                                             <input class="form-control" type="text"
-                                                name="resource_name_{{ $resource }}" value="{{ $resource }}"
+                                                value="{{ $resource->name }}"
                                                 readonly>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Unit</label>
+                                            <label for="example-text-input" class="form-control-label">Qty</label>
                                             <input class="form-control" type="number" min="0"
-                                                onchange="calculate_price('{{ strtolower($resource) }}')"
-                                                id="{{ strtolower($resource) }}" class="resources_controller"
-                                                name="{{ strtolower($resource) }}"
-                                                value="{{ $transactions['resources'][$resource] }}">
+                                                value="{{ $resource->qty }}"
+                                                readonly>
 
                                         </div>
                                     </div>
@@ -61,30 +53,43 @@
                                     {{-- Resource Price --}}
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Resource
+                                            <label for="example-text-input" class="form-control-label">Total
                                                 Price</label>
-                                            <input type="hidden" id="price_{{ strtolower($resource) }}"
-                                                name="price_{{ strtolower($resource) }}"
-                                                value="{{ $transactions['resources_price'][$resource] }}">
-                                            <input type="hidden" id="stock_id_{{ strtolower($resource) }}"
-                                                name="stock_id_{{ strtolower($resource) }}"
-                                                value="{{ $transactions['stock_id'][$resource] }}">
-                                            <input type="number" min="0"
-                                                id="resource_price_{{ strtolower($resource) }}"
-                                                name="resource_price_{{ strtolower($resource) }}" class="form-control"
-                                                value="{{ $transactions['resources'][$resource] * $transactions['resources_price'][$resource] }}">
-
+                                                <input class="form-control" type="number" min="0"
+                                                value="{{ $resource->total_price }}"
+                                                readonly>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
 
+                            <div class="row">
+                                {{-- Buy Price --}}
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Buy Price</label>
+                                        <input class="form-control" type="number" min="0" name="buy_price"
+                                            value="{{ $sale->get_sum() }}"
+                                            readonly>
+                                    </div>
+                                </div>
+
+                                {{-- Sell Price --}}
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Sell Price</label>
+                                        <input class="form-control" type="number" min="0" name="sell_price"
+                                            value="{{ $sale->get_sum() }}">
+                                    </div>
+                                </div>
+                            </div>
+
                             {{-- Button Save --}}
                             <input type="hidden" name="id"
-                                value="{{ !isset($transactions) ? '' : old('id', encrypt($transactions['transaction_id'])) }}">
+                                value="{{ !isset($sale) ? '' : old('id', encrypt($sale->id)) }}">
                             <div>
                                 <button type="submit" class="btn btn-primary btn-sm ms-auto"
-                                    style="margin-top: 20px;">Save</button>
+                                    style="margin-top: 20px;">Insert</button>
                             </div>
                         </div>
                     </form>
