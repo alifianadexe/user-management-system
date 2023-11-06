@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => $title])
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+    @include('layouts.navbars.auth.topnav', ['title' => $title])s
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
@@ -28,9 +25,11 @@
                                             <select class="form-control" name="kingdom_id">
                                                 @foreach ($kingdoms as $i => $kingdom)
                                                     @if ($kingdom->id == $resources['kingdom_id'])
-                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}</option>
+                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
+                                                        </option>
                                                     @else
-                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}</option>
+                                                        <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
+                                                        </option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -40,11 +39,11 @@
                                         @enderror
                                     </div>
                                 </div>
-                                    <script>
-                                        $(document).ready(function() {
-                                            $('select').select2();
-                                        });
-                                    </script>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('select').select2();
+                                    });
+                                </script>
                             </div>
 
                             @foreach ($resources_name as $i => $resource_name)
