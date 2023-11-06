@@ -28,6 +28,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\KingdomController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StocksController;
 use App\Http\Controllers\TransactionsController;
 
@@ -87,6 +88,11 @@ Route::middleware(['web', 'auth', 'role:user'])->group(function () {
 	Route::post('/transactions', [TransactionsController::class, 'store'])->name('transactions.store')->middleware('auth');
 	Route::post('/transactions/update', [TransactionsController::class, 'update'])->name('transactions.update')->middleware('auth');
 	Route::get('/transactions/reject/{id}', [TransactionsController::class, 'reject'])->name('transactions.reject')->middleware('auth');
+
+	// Sales
+Route::get('/sales', [SalesController::class, 'index'])->name('sales')->middleware('auth');
+Route::get('/sales/edit/{id}', [SalesController::class, 'show'])->name('sales.edit')->middleware('auth');
+Route::post('/sales/insert', [SalesController::class, 'insert'])->name('sales.insert')->middleware('auth');
 });
 
 Route::middleware(['web', 'auth', 'status:active'])->group(function () {
