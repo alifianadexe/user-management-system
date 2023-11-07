@@ -22,7 +22,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kingdom ID</label>
-                                        <select class="form-control" name="kingdom_id">
+                                        <select class="form-control my-select" name="kingdom_id">
                                             <option value="{{ $transactions['kingdom_id'] }}">
                                                 {{ $transactions['kingdom_id'] }}
                                             </option>
