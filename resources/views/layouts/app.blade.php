@@ -82,7 +82,7 @@
         $(document).ready(function() {
             $('#myTable').DataTable();
             $('#myTable2').DataTable();
-            $('.form-control').select2();
+            $('.my-select').select2();
         });
     </script>
 </body>

@@ -98,7 +98,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Ownership</label>
                                         <div class="custom-select">
-                                            <select class="form-control mb-2" name="ownership" id="ownershipSelect">
+                                            <select class="form-control mb-2 my-select" name="ownership" id="ownershipSelect">
                                                 <option value="owner" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='owner' ? 'selected' : ''  }}>Owner</option>
                                                 <option value="admin" {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='admin' ? 'selected' : ''  }}>Admin</option>
                                                 <option value="user"  {{ (!isset($users) ? "" : old('ownership', $users->ownership)) =='user' ? 'selected' : ''  }}>User</option>
@@ -110,7 +110,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Status</label>
                                         <div class="custom-select">
-                                            <select class="form-control mb-2" name="status" id="statusSelect">
+                                            <select class="form-control mb-2 my-select" name="status" id="statusSelect">
                                             <option value="active" {{ (!isset($users) ? "" : old('status', $users->status)) =='active' ? 'selected' : ''  }}>Active</option>
                                             <option value="reject" {{ (!isset($users) ? "" : old('status', $users->status)) =='reject' ? 'selected' : ''  }}>Rejected</option>
                                             <option value="deleted"  {{ (!isset($users) ? "" : old('status', $users->status)) =='deleted' ? 'selected' : ''  }}>Deleted</option>

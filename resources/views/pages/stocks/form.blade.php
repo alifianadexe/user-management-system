@@ -2,9 +2,6 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => $title])
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
@@ -27,7 +24,7 @@
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Kingdom ID</label>
                                             <div class="custom-select">
-                                                <select class="form-control" name="kingdom_id">
+                                                <select class="form-control my-select" name="kingdom_id">
                                                     @foreach ($kingdoms as $i => $kingdom)
                                                         @if ($kingdom->id == $resources['kingdom_id'])
                                                             <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
@@ -43,11 +40,6 @@
                                                 <p class='text-danger text-xs pt-1'> {{ $message }} </p>
                                             @enderror
                                         </div>
-                                        <script>
-                                        $(document).ready(function() {
-                                            $('select').select2();
-                                        });
-                                        </script>
                                     </div>
                                 </div>
 

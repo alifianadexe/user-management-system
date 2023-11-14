@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kingdom ID</label>
                                         <div class="custom-select">
-                                            <select class="form-control" name="kingdom_id">
+                                            <select class="form-control my-select" name="kingdom_id">
                                                 @foreach ($kingdoms as $i => $kingdom)
                                                     @if ($kingdom->id == $resources['kingdom_id'])
                                                         <option value="{{ $kingdom->id }}"> {{ $kingdom->kingdom_id }}
@@ -39,11 +39,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <script>
-                                    $(document).ready(function() {
-                                        $('select').select2();
-                                    });
-                                </script>
                             </div>
 
                             @foreach ($resources_name as $i => $resource_name)
